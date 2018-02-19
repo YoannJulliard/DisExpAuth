@@ -8,9 +8,19 @@
 		 <script src="js/plugins/jspsych-survey-text.js"></script>
 		 <script src="js/plugins/jspsych-call-function.js"></script>
 		 <script src="js/keenio-credentials.js"></script>
+		 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 		 <link href="css/jspsych.css" rel="stylesheet" type="text/css"></link>
     </head>
-    <body></body>
+    <body><div class="alert alert-warning" style="position: absolute; z-index: 99999999", >
+  <strong>Warning!</strong> Indicates a warning that might need attention.
+</div>
+
+
+
+
+
+</body>
 	<script>	
 // init functions ---------------------------------------------------------
 // keen.io initialization -------------------------------------------------
@@ -52,21 +62,37 @@ var saving_id = function(){
   var id = get_id();
 
   KeenAsync.ready(function(){
-    var client = new KeenAsync({
-      projectId: stream_projectID,
-      writeKey: stream_writeKey,
-    });
-    if(data_stream) {
-      client.recordEvent('session_id', {
-        session_id: id,
-        // source: source,
-        // message: message,
-        // target: target,
-        // target_side_1: target_side_1,
-        // positive_side: positive_side,
-      });
-    }
-  });
+  	var client = new KeenAsync({
+  		projectId: stream_projectID,
+  		writeKey: stream_writeKey,
+  	});
+
+  	if(data_stream) {
+  		client.recordEvent(
+  			'session_id',
+  			{
+  				session_id: id,
+		        // source: source,
+		        // message: message,
+		        // target: target,
+		        // target_side_1: target_side_1,
+		        // positive_side: positive_side,
+		    }, 
+		    function(err, res){
+		    	if (err) {
+		    		var alert_box = document.createElement('div');
+		    		alert_box.className += " alert alert-warning";
+		    		alert_box.style.cssText = 'position:absolute';
+		    		var alert_text = document.createTextNode("Impossible de se connecter au serveur. Vos données ne sont pas récupérées. Merci de raffraichir la page.")
+
+		    		alert_box.appendChild(alert_text);
+
+		    		document.body.appendChild(alert_box);
+		    	}
+		    }
+		    );
+  	};
+  })
 }
 
 var save_id = {
