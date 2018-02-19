@@ -254,7 +254,7 @@ switch(random_assign()) {
 	var trial_block2 = {
 	  timeline: [
 		{
-		  type: jsPsych.timelineVariable('type'),
+		  type: "iat-html",
 		  is_html: jsPsych.timelineVariable('is_html'),
 		  stimulus: jsPsych.timelineVariable('stimulus'),
 		  stim_key_association: jsPsych.timelineVariable('stim_key_association'),
@@ -265,30 +265,14 @@ switch(random_assign()) {
 		  trial_duration: 3000, //Only if display_feedback is false
 		  left_category_key: 'E',
 		  right_category_key: 'I',
-		  left_category_label: ['POSITIF'],
-		  right_category_label: ['NEGATIF', 'LUUPITES'],
+		  left_category_label: ['POSITIF',  block_2_left_label_bottom],
+		  right_category_label: ['NEGATIF', block_2_right_label_bottom],
 		  response_ends_trial: true,
 		  data: {iat_type: 'negatif-luupites'}
 		},
 		save_iat_trial
 		],
-		timeline_variables: [
-			{type: 'iat-html', stimulus: "meesolup", stim_key_association: "right"},
-			{type: 'iat-html', stimulus: "naanolup", stim_key_association: "right"},
-			{type: 'iat-html', stimulus: "omeelup", stim_key_association: "right"},
-			{type: 'iat-html', stimulus: "wenaalup", stim_key_association: "right"},
-			
-			{type: 'iat-html', stimulus: "chance", stim_key_association: "left"},
-			{type: 'iat-html', stimulus: "honneur", stim_key_association: "left"},
-			{type: 'iat-html', stimulus: "paix", stim_key_association: "left"},
-			{type: 'iat-html', stimulus: "plaisir", stim_key_association: "left"},
-			{type: 'iat-html', stimulus: "miracle", stim_key_association: "left"},
-			{type: 'iat-html', stimulus: "poison", stim_key_association: "right"},
-			{type: 'iat-html', stimulus: "désastre", stim_key_association: "right"},
-			{type: 'iat-html', stimulus: "haine", stim_key_association: "right"},
-			{type: 'iat-html', stimulus: "bombe", stim_key_association: "right"},
-			{type: 'iat-html', stimulus: "accident", stim_key_association: "right"}
-		],
+		timeline_variables: iat_block_1_2_stimuli,
 		randomize_order: true,
 		repetitions: 3	
 	};
