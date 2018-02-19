@@ -70,13 +70,13 @@ var saving_iat_trial = function(){
     });
     if(data_stream) {
       client.recordEvent('iat_trial', {
-        // session_id: id,
+        session_id: id,
         // source: source,
         // message: message,
         // target: target,
         // target_side_1: target_side_1,
         // positive_side: positive_side,
-        // trial_data: jsPsych.data.get().last().json()
+        trial_data: jsPsych.data.get().last().json()
       });
     }
   });
@@ -143,7 +143,8 @@ var save_iat_trial = {
 		  right_category_label: ['NEGATIF', 'LUUPITES'],
 		  response_ends_trial: true,
 		  data: {iat_type: 'practice'}
-		}
+		},
+		save_iat_trial
 		],
 		timeline_variables: [
 			{type: 'iat-html', stimulus: "meesolup", stim_key_association: "right"},
@@ -201,7 +202,8 @@ var save_iat_trial = {
 		  right_category_label: ['NEGATIF', 'LUUPITES'],
 		  response_ends_trial: true,
 		  data: {iat_type: 'negatif-luupites'}
-		}
+		},
+		save_iat_trial
 		],
 		timeline_variables: [
 			{type: 'iat-html', stimulus: "meesolup", stim_key_association: "right"},
@@ -257,7 +259,8 @@ var save_iat_trial = {
 		  right_category_label: ['NEGATIF'],
 		  response_ends_trial: true,
 		  data: {iat_type: 'practice'}
-		}
+		},
+		save_iat_trial
 		],
 		timeline_variables: [
 			{type: 'iat-html', stimulus: "meesolup", stim_key_association: "left"},
@@ -312,7 +315,8 @@ var save_iat_trial = {
 		  right_category_label: ['NEGATIF'],
 		  response_ends_trial: true,
 		  data: {iat_type: 'positif-luupites'}
-		}
+		},
+		save_iat_trial
 		],
 		timeline_variables: [
 			{type: 'iat-html', stimulus: "meesolup", stim_key_association: "left"},
