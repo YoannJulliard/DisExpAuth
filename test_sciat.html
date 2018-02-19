@@ -7,6 +7,7 @@
 		 <script src="js/plugins/jspsych-iat-html.js"></script>
 		 <script src="js/plugins/jspsych-survey-text.js"></script>
 		 <script src="js/plugins/jspsych-call-function.js"></script>
+		 <script src="js/plugins/jspsych-instructions.js"></script>
 		 <script src="js/keenio-credentials.js"></script>
 		 <link href="css/jspsych.css" rel="stylesheet" type="text/css"></link>
     </head>
@@ -166,6 +167,21 @@ switch(random_assign()) {
 		type: 'survey-text',
 		questions: [{prompt: "Afin de rendre vos données anonymes, vous allez devoir générer un identifiant qui vous sera unique et que vous seul connaitrez. Pour cela, vous devez indiquer dans le champs ci-dessous la première lettre de votre prénom, la première lettre du prénom de votre mère, la première lettre du prénom de votre père, puis votre jour de naissance. <br /><br /><i>Warren, né de Lise et de Yoann le 2 Juillet devra ainsi indiquer dans la case WLY02.</i>"}],
 	};
+	
+	// Texte inductif
+		// Randomiser la source + Envoyer sur Keen.io la condition du participant
+	var inductive_text = {
+		type: 'instructions',
+		pages: [
+			'Première partie sur les Luupites avec induction du type de source.<br> On essaye de faire de bon espaces entre les lignes de sorte à ce que le texte soit assez plaisant à lire',
+			'On continue sûrement à parler un peu des Luupites en divisant le texte sur plusieurs pages.',
+			'Sur la troisième page, on explique qu\'ils vont faire une tâche de distraction...'
+		],
+		show_clickable_nav: true
+	};
+		
+	// Explication cover-story IAT	
+	
 
 	// Explication catégories
 	var category_block = {
@@ -381,6 +397,7 @@ switch(random_assign()) {
 		repetitions: 3
 	};	
 	
+	// Supprimer ?
 	var debrief_block = {
 		type: "html-keyboard-response",
 		stimulus: function() {
@@ -405,11 +422,15 @@ switch(random_assign()) {
 				"<p><i>Un 'biais' signifie que vous associez plus facilement les Luupites au positif qu'au négatif</i></p>"
 		}
 	};
+	
+	// Questions sur le texte inductif
+	
 
 	// Définit la timeline (ordre d'exécution des blocks)
 	var timeline = [];
 	timeline.push(welcome_block);
 	timeline.push(id_trial, save_id);
+	timeline.push(inductive_text);
 	timeline.push(category_block);
 	timeline.push(instructions_block1);
 	timeline.push(trial_block1);
