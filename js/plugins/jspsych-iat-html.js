@@ -116,7 +116,7 @@
       trial.left_category_label[0].bold() + "</p></div>";
     } else {
       html_str += "<p>Press " + trial.left_category_key + " for:<br> " +
-      trial.left_category_label[0].bold() + "<br>" + "or<br>" +
+      trial.left_category_label[0].bold() + "<br>" + "ou<br>" +
       trial.left_category_label[1].bold() + "</p></div>";
     }
 
@@ -127,7 +127,7 @@
       trial.right_category_label[0].bold() + '</p></div>';
     } else {
       html_str += "<p>Press " + trial.right_category_key + " for:<br> " +
-      trial.right_category_label[0].bold() + "<br>" + "or<br>" +
+      trial.right_category_label[0].bold() + "<br>" + "ou<br>" +
       trial.right_category_label[1].bold() + "</p></div>";
     }
 

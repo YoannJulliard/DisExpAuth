@@ -100,10 +100,22 @@ var save_iat_trial = {
     func: saving_iat_trial
 }
 // Variables ----------------------------------------------------------------------------
+// Assignation --------------------------------------------------------------------------
+var target_side_1 = undefined;
+
+switch(random_assign()) {
+	case true:
+		target_side_1 = "right";
+		break;
+
+	case false: 
+		target_side_1 = "left";
+		break;
+}
+
 
 	// Variables
 	var target = "Luupites";
-	var target_side_1 = "right";
 	var target_label = "LUUPITES";
 	
 	// Preparation randomisation ordre block
