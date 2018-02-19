@@ -25,8 +25,8 @@
 // get_id():
 // Get id input.
 var get_id = function() {
- // var id = jsPsych.data.getDataByTimelineNode("0.0-1.0").values()[0].responses.slice(7, -2);
- // return(id)
+ var id = jsPsych.data.getDataByTimelineNode("0.0-1.0").values()[0].responses.slice(7, -2);
+ return(id)
 }
 
 // Saving blocks ------------------------------------------------------------------------
@@ -86,6 +86,7 @@ var saving_iat_trial = function(){
 	
 	var id_trial = {
 		type: 'survey-text',
+		questions: [{prompt: "Afin de rendre vos données anonymes, vous allez devoir générer un identifiant qui vous sera unique et que vous seul connaitrez. Pour cela, vous devez indiquer dans le champs ci-dessous la première lettre de votre prénom, la première lettre du prénom de votre mère, la première lettre du prénom de votre père, puis votre jour de naissance. <br /><br /><i>Warren, né de Lise et de Yoann le 2 Juillet devra ainsi indiquer dans la case WLY02.</i>"}],
 	};
 
 	// Explication catégories
