@@ -5,6 +5,7 @@
 		 <script src="js/jspsych.js"></script>
 		 <script src="js/plugins/jspsych-html-keyboard-response.js"></script>
 		 <script src="js/plugins/jspsych-iat-html.js"></script>
+		 <script src="js/plugins/jspsych-survey-text.js"></script>
 		 <script src="js/keenio-credentials.js"></script>
 		 <link href="css/jspsych.css" rel="stylesheet" type="text/css"></link>
     </head>
@@ -83,6 +84,10 @@ var saving_iat_trial = function(){
 		post_trial_gap: 500
 	};
 	
+	var id_trial = {
+		type: 'survey-text',
+	};
+
 	// Explication catégories
 	var category_block = {
 		type: "html-keyboard-response",
@@ -346,6 +351,7 @@ var saving_iat_trial = function(){
 	// Définit la timeline (ordre d'exécution des blocks)
 	var timeline = [];
 	timeline.push(welcome_block);
+	timeline.push(id_trial);
 	timeline.push(category_block);
 	timeline.push(instructions_block1);
 	timeline.push(trial_block1);
