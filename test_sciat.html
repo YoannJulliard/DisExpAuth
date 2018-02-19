@@ -28,6 +28,53 @@ var get_id = function() {
  // return(id)
 }
 
+// Saving blocks ------------------------------------------------------------------------
+// Every function here send the data to keen.io. Because data sent is different according
+// to trial type, there are differents function definition.
+
+// init ---------------------------------------------------------------------------------
+var saving_id = function(){
+  var id = get_id();
+
+  KeenAsync.ready(function(){
+    var client = new KeenAsync({
+      projectId: stream_projectID,
+      writeKey: stream_writeKey,
+    });
+    if(data_stream) {
+      client.recordEvent('session_id', {
+        // session_id: id,
+        // source: source,
+        // message: message,
+        // target: target,
+        // target_side_1: target_side_1,
+        // positive_side: positive_side,
+      });
+    }
+  });
+}
+
+// iat trial ----------------------------------------------------------------------------
+var saving_iat_trial = function(){
+  var id = get_id();
+  KeenAsync.ready(function(){
+    var client = new KeenAsync({
+      projectId: stream_projectID,
+      writeKey: stream_writeKey
+    });
+    if(data_stream) {
+      client.recordEvent('iat_trial', {
+        // session_id: id,
+        // source: source,
+        // message: message,
+        // target: target,
+        // target_side_1: target_side_1,
+        // positive_side: positive_side,
+        // trial_data: jsPsych.data.get().last().json()
+      });
+    }
+  });
+}
 
 	// Ecran de bienvenue
 	var welcome_block = {
