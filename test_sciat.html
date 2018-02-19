@@ -37,6 +37,12 @@ var random_assign = function() {
 
 	return logical;
 }
+
+// Creation d'une variable "source" qui randomise la source
+var source = jsPsych.randomization.sampleWithoutReplacement(["autorité", "expertise", "controle"], 1)[0];
+
+
+
 // get_id():
 // Get id input.
 var get_id = function() {
@@ -173,7 +179,7 @@ switch(random_assign()) {
 	var inductive_text = {
 		type: 'instructions',
 		pages: [
-			'Première partie sur les Luupites avec induction du type de source.<br> On essaye de faire de bon espaces entre les lignes de sorte à ce que le texte soit assez plaisant à lire',
+			'Première partie sur les Luupites avec induction du type de source : '+ source +'.<br> On essaye de faire de bon espaces entre les lignes de sorte à ce que le texte soit assez plaisant à lire',
 			'On continue sûrement à parler un peu des Luupites en divisant le texte sur plusieurs pages.',
 			'Sur la troisième page, on explique qu\'ils vont faire une tâche de distraction...'
 		],
