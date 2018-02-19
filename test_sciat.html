@@ -41,8 +41,6 @@ var random_assign = function() {
 // Creation d'une variable "source" qui randomise la source
 var source = jsPsych.randomization.sampleWithoutReplacement(["autorité", "expertise", "controle"], 1)[0];
 
-
-
 // get_id():
 // Get id input.
 var get_id = function() {
@@ -67,11 +65,8 @@ var saving_id = function(){
     if(data_stream) {
       client.recordEvent('session_id', {
         session_id: id,
-        // source: source,
-        // message: message,
-        // target: target,
-        // target_side_1: target_side_1,
-        // positive_side: positive_side,
+        source: source,
+        target_side_1: target_side_1,
       });
     }
   });
@@ -94,11 +89,8 @@ var saving_iat_trial = function(){
     if(data_stream) {
       client.recordEvent('iat_trial', {
         session_id: id,
-        // source: source,
-        // message: message,
-        // target: target,
-        // target_side_1: target_side_1,
-        // positive_side: positive_side,
+        source: source,
+        target_side_1: target_side_1,
         trial_data: jsPsych.data.get().last().json()
       });
     }
