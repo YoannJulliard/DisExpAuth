@@ -11,7 +11,7 @@
 		 <link href="css/jspsych.css" rel="stylesheet" type="text/css"></link>
     </head>
     <body></body>
-	<script>
+	<script>	
 // init functions ---------------------------------------------------------
 // keen.io initialization -------------------------------------------------
 // This part will work only if stream_projectID & stream_writeKey have been defined.
@@ -99,9 +99,47 @@ var save_iat_trial = {
     type: 'call-function',
     func: saving_iat_trial
 }
+// Variables ----------------------------------------------------------------------------
+
+	// Variables
+	var target = "Luupites";
+	var target_side_1 = "right";
+	var target_label = "LUUPITES";
+	
+	// Preparation randomisation ordre block
+	switch (target_side_1) {
+		case "left":
+			target_side_1st = "left";
+			target_side_2nd = "right";
+			
+			block_1_left_label_bottom = target_label;
+			block_1_right_label_bottom = "&nbsp";
+			block_2_left_label_bottom = target_label;
+			block_2_right_label_bottom = "&nbsp";
+			block_3_left_label_bottom = "&nbsp";
+			block_3_right_label_bottom = target_label;
+			block_4_left_label_bottom = "&nbsp";
+			block_4_right_label_bottom = target_label;
+		break;
+		
+		case "right":
+			target_side_1st = "right";
+			target_side_2nd = "left";
+			
+			block_1_left_label_bottom = "&nbsp";
+			block_1_right_label_bottom = target_label;
+			block_2_left_label_bottom = "&nbsp";
+			block_2_right_label_bottom = target_label;
+			block_3_left_label_bottom = target_label;
+			block_3_right_label_bottom = "&nbsp";
+			block_4_left_label_bottom = target_label;
+			block_4_right_label_bottom = "&nbsp";
+		break;
+	}
+	
 
 // Experiment ---------------------------------------------------------------------------
-	// Ecran de bienvenue
+// Ecran de bienvenue
 	var welcome_block = {
 		type: "html-keyboard-response",
 		stimulus: "<b>Bienvenue</b> dans notre expérience, appuyez sur une touche pour continuer.",
@@ -138,11 +176,31 @@ var save_iat_trial = {
 		post_trial_gap: 1500
 	};
 	
-	// Entrainement negatif-luupites
+	//Stimuli block_1 et block_2
+	var iat_block_1_2_stimuli = [
+		{stimulus: "maasolup", stim_key_association: "target_side_1st"},
+		{stimulus: "neenolup", stim_key_association: "target_side_1st"},
+		{stimulus: "omeelup", stim_key_association: "target_side_1st"},
+		{stimulus: "wenaalup", stim_key_association: "target_side_1st"},
+		{stimulus: "tuuralup", stim_key_association: "target_side_1st"},
+		
+		{stimulus: "chance", stim_key_association: "left"},
+		{stimulus: "honneur", stim_key_association: "left"},
+		{stimulus: "paix", stim_key_association: "left"},
+		{stimulus: "plaisir", stim_key_association: "left"},
+		{stimulus: "miracle", stim_key_association: "left"},
+		{stimulus: "poison", stim_key_association: "right"},
+		{stimulus: "désastre", stim_key_association: "right"},
+		{stimulus: "haine", stim_key_association: "right"},
+		{stimulus: "bombe", stim_key_association: "right"},
+		{stimulus: "accident", stim_key_association: "right"}		
+	]
+	
+	// Block 1 : Entrainement
 	var trial_block1 = {
 	  timeline: [
 		{
-		  type: jsPsych.timelineVariable('type'),
+		  type: 'iat-html',
 		  stimulus: jsPsych.timelineVariable('stimulus'),
 		  stim_key_association: jsPsych.timelineVariable('stim_key_association'),
 		  html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
@@ -152,30 +210,14 @@ var save_iat_trial = {
 		  trial_duration: 3000, //Only if display_feedback is false
 		  left_category_key: 'E',
 		  right_category_key: 'I',
-		  left_category_label: ['POSITIF'],
-		  right_category_label: ['NEGATIF', 'LUUPITES'],
+		  left_category_label: ['POSITIF', block_1_left_label_bottom],
+		  right_category_label: ['NEGATIF', block_1_right_label_bottom],
 		  response_ends_trial: true,
 		  data: {iat_type: 'practice'}
 		},
 		save_iat_trial
 		],
-		timeline_variables: [
-			{type: 'iat-html', stimulus: "meesolup", stim_key_association: "right"},
-			{type: 'iat-html', stimulus: "naanolup", stim_key_association: "right"},
-			{type: 'iat-html', stimulus: "omeelup", stim_key_association: "right"},
-			{type: 'iat-html', stimulus: "wenaalup", stim_key_association: "right"},
-			
-			{type: 'iat-html', stimulus: "chance", stim_key_association: "left"},
-			{type: 'iat-html', stimulus: "honneur", stim_key_association: "left"},
-			{type: 'iat-html', stimulus: "paix", stim_key_association: "left"},
-			{type: 'iat-html', stimulus: "plaisir", stim_key_association: "left"},
-			{type: 'iat-html', stimulus: "miracle", stim_key_association: "left"},
-			{type: 'iat-html', stimulus: "poison", stim_key_association: "right"},
-			{type: 'iat-html', stimulus: "désastre", stim_key_association: "right"},
-			{type: 'iat-html', stimulus: "haine", stim_key_association: "right"},
-			{type: 'iat-html', stimulus: "bombe", stim_key_association: "right"},
-			{type: 'iat-html', stimulus: "accident", stim_key_association: "right"}
-		],
+		timeline_variables: iat_block_1_2_stimuli,
 		randomize_order: true,
 		repetitions: 1
 	};
