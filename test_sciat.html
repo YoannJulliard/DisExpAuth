@@ -6,6 +6,7 @@
 		 <script src="js/plugins/jspsych-html-keyboard-response.js"></script>
 		 <script src="js/plugins/jspsych-iat-html.js"></script>
 		 <script src="js/plugins/jspsych-survey-text.js"></script>
+		 <script src="js/plugins/jspsych-call-function.js"></script>
 		 <script src="js/keenio-credentials.js"></script>
 		 <link href="css/jspsych.css" rel="stylesheet" type="text/css"></link>
     </head>
@@ -44,7 +45,7 @@ var saving_id = function(){
     });
     if(data_stream) {
       client.recordEvent('session_id', {
-        // session_id: id,
+        session_id: id,
         // source: source,
         // message: message,
         // target: target,
@@ -55,6 +56,10 @@ var saving_id = function(){
   });
 }
 
+var save_id = {
+    type: 'call-function',
+    func: saving_id
+}
 // iat trial ----------------------------------------------------------------------------
 var saving_iat_trial = function(){
   var id = get_id();
@@ -75,6 +80,11 @@ var saving_iat_trial = function(){
       });
     }
   });
+}
+
+var save_iat_trial = {
+    type: 'call-function',
+    func: saving_iat_trial
 }
 
 	// Ecran de bienvenue
@@ -352,7 +362,7 @@ var saving_iat_trial = function(){
 	// Définit la timeline (ordre d'exécution des blocks)
 	var timeline = [];
 	timeline.push(welcome_block);
-	timeline.push(id_trial);
+	timeline.push(id_trial, save_id);
 	timeline.push(category_block);
 	timeline.push(instructions_block1);
 	timeline.push(trial_block1);
