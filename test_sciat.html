@@ -48,6 +48,7 @@ var get_id = function() {
 // to trial type, there are differents function definition.
 
 // init ---------------------------------------------------------------------------------
+// Ici on upload l'id du pp avec toutes les conditions etc...
 var saving_id = function(){
   var id = get_id();
 
@@ -74,7 +75,9 @@ var save_id = {
     func: saving_id
 }
 // iat trial ----------------------------------------------------------------------------
+// Crée la fonction saving_iat_trial
 var saving_iat_trial = function(){
+	// définit la variable id pour l'utiliser plus bas dans "client.recordEvent"
   var id = get_id();
   KeenAsync.ready(function(){
     var client = new KeenAsync({
@@ -95,6 +98,7 @@ var saving_iat_trial = function(){
   });
 }
 
+// Traduit la fonction saving_iat_trial et fonction lisible par jspsych
 var save_iat_trial = {
     type: 'call-function',
     func: saving_iat_trial
@@ -227,6 +231,7 @@ switch(random_assign()) {
 		  response_ends_trial: true,
 		  data: {iat_type: 'practice'}
 		},
+		//Appelle la fonction save_iat_trial qui enregistre les données spécifiées au moment de l'exécution du trial.
 		save_iat_trial
 		],
 		timeline_variables: iat_block_1_2_stimuli,
