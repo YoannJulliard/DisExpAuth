@@ -206,8 +206,26 @@ switch(random_assign()) {
 		{stimulus: "haine",    stim_key_association: "right"},
 		{stimulus: "bombe",    stim_key_association: "right"},
 		{stimulus: "accident", stim_key_association: "right"}		
-	]
+	];
 	
+	var iat_block_3_4_stimuli = [
+			{stimulus: "meesolup", stim_key_association: target_side_2nd},
+			{stimulus: "naanolup", stim_key_association: target_side_2nd},
+			{stimulus: "omeelup",  stim_key_association: target_side_2nd},
+			{stimulus: "wenaalup", stim_key_association: target_side_2nd},
+			
+			{stimulus: "chance",   stim_key_association: "left"},
+			{stimulus: "honneur",  stim_key_association: "left"},
+			{stimulus: "paix",     stim_key_association: "left"},
+			{stimulus: "plaisir",  stim_key_association: "left"},
+			{stimulus: "miracle",  stim_key_association: "left"},
+			{stimulus: "poison",   stim_key_association: "right"},
+			{stimulus: "désastre", stim_key_association: "right"},
+			{stimulus: "haine",    stim_key_association: "right"},
+			{stimulus: "bombe",    stim_key_association: "right"},
+			{stimulus: "accident", stim_key_association: "right"}
+	];
+
 	// Block 1 : Entrainement
 	var trial_block1 = {
 	  timeline: [
@@ -313,23 +331,7 @@ switch(random_assign()) {
 		},
 		save_iat_trial
 		],
-		timeline_variables: [
-			{type: 'iat-html', stimulus: "meesolup", stim_key_association: "left"},
-			{type: 'iat-html', stimulus: "naanolup", stim_key_association: "left"},
-			{type: 'iat-html', stimulus: "omeelup", stim_key_association: "left"},
-			{type: 'iat-html', stimulus: "wenaalup", stim_key_association: "left"},
-			
-			{type: 'iat-html', stimulus: "chance", stim_key_association: "left"},
-			{type: 'iat-html', stimulus: "honneur", stim_key_association: "left"},
-			{type: 'iat-html', stimulus: "paix", stim_key_association: "left"},
-			{type: 'iat-html', stimulus: "plaisir", stim_key_association: "left"},
-			{type: 'iat-html', stimulus: "miracle", stim_key_association: "left"},
-			{type: 'iat-html', stimulus: "poison", stim_key_association: "right"},
-			{type: 'iat-html', stimulus: "désastre", stim_key_association: "right"},
-			{type: 'iat-html', stimulus: "haine", stim_key_association: "right"},
-			{type: 'iat-html', stimulus: "bombe", stim_key_association: "right"},
-			{type: 'iat-html', stimulus: "accident", stim_key_association: "right"}
-		],
+		timeline_variables: iat_block_3_4_stimuli,
 		randomize_order: true,
 		repetitions: 1
 	};
@@ -369,23 +371,7 @@ switch(random_assign()) {
 		},
 		save_iat_trial
 		],
-		timeline_variables: [
-			{type: 'iat-html', stimulus: "meesolup", stim_key_association: "left"},
-			{type: 'iat-html', stimulus: "naanolup", stim_key_association: "left"},
-			{type: 'iat-html', stimulus: "omeelup", stim_key_association: "left"},
-			{type: 'iat-html', stimulus: "wenaalup", stim_key_association: "left"},
-			
-			{type: 'iat-html', stimulus: "chance", stim_key_association: "left"},
-			{type: 'iat-html', stimulus: "honneur", stim_key_association: "left"},
-			{type: 'iat-html', stimulus: "paix", stim_key_association: "left"},
-			{type: 'iat-html', stimulus: "plaisir", stim_key_association: "left"},
-			{type: 'iat-html', stimulus: "miracle", stim_key_association: "left"},
-			{type: 'iat-html', stimulus: "poison", stim_key_association: "right"},
-			{type: 'iat-html', stimulus: "désastre", stim_key_association: "right"},
-			{type: 'iat-html', stimulus: "haine", stim_key_association: "right"},
-			{type: 'iat-html', stimulus: "bombe", stim_key_association: "right"},
-			{type: 'iat-html', stimulus: "accident", stim_key_association: "right"}
-		],
+		timeline_variables: iat_block_3_4_stimuli,
 		randomize_order: true,
 		repetitions: 3
 	};	
