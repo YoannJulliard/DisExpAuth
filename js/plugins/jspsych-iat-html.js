@@ -111,23 +111,23 @@
 
     html_str += "<div id='trial_left_align' style='position: absolute; top: 18%; left: 20%'>";
 
-    if(trial.left_category_label.length == 1) {
-      html_str += "<p>Press " + trial.left_category_key + " for:<br> " +
+    if(trial.left_category_label.length == 1 || trial.left_category_label[1] == "&nbsp") {
+      html_str += "<p>Appuyez sur " + trial.left_category_key + " pour :<br> " +
       trial.left_category_label[0].bold() + "</p></div>";
     } else {
-      html_str += "<p>Press " + trial.left_category_key + " for:<br> " +
-      trial.left_category_label[0].bold() + "<br>" + "or<br>" +
+      html_str += "<p>Appuyez sur " + trial.left_category_key + " pour :<br> " +
+      trial.left_category_label[0].bold() + "<br>" + "ou<br>" +
       trial.left_category_label[1].bold() + "</p></div>";
     }
 
     html_str += "<div id='trial_right_align' style='position: absolute; top: 18%; right: 20%'>";
 
-    if(trial.right_category_label.length == 1) {
-      html_str += "<p>Press " + trial.right_category_key + " for:<br> " +
+    if(trial.right_category_label.length == 1 || trial.right_category_label[1] == "&nbsp") {
+      html_str += "<p>Appuyez sur " + trial.right_category_key + " pour :<br> " +
       trial.right_category_label[0].bold() + '</p></div>';
     } else {
-      html_str += "<p>Press " + trial.right_category_key + " for:<br> " +
-      trial.right_category_label[0].bold() + "<br>" + "or<br>" +
+      html_str += "<p>Appuyez sur " + trial.right_category_key + " pour :<br> " +
+      trial.right_category_label[0].bold() + "<br>" + "ou<br>" +
       trial.right_category_label[1].bold() + "</p></div>";
     }
 

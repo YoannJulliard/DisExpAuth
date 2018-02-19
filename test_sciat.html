@@ -100,10 +100,22 @@ var save_iat_trial = {
     func: saving_iat_trial
 }
 // Variables ----------------------------------------------------------------------------
+// Assignation --------------------------------------------------------------------------
+var target_side_1 = undefined;
+
+switch(random_assign()) {
+	case true:
+		target_side_1 = "right";
+		break;
+
+	case false: 
+		target_side_1 = "left";
+		break;
+}
+
 
 	// Variables
 	var target = "Luupites";
-	var target_side_1 = "right";
 	var target_label = "LUUPITES";
 	
 	// Preparation randomisation ordre block
@@ -178,21 +190,21 @@ var save_iat_trial = {
 	
 	//Stimuli block_1 et block_2
 	var iat_block_1_2_stimuli = [
-		{stimulus: "maasolup", stim_key_association: "target_side_1st"},
-		{stimulus: "neenolup", stim_key_association: "target_side_1st"},
-		{stimulus: "omeelup", stim_key_association: "target_side_1st"},
-		{stimulus: "wenaalup", stim_key_association: "target_side_1st"},
-		{stimulus: "tuuralup", stim_key_association: "target_side_1st"},
+		{stimulus: "maasolup", stim_key_association: target_side_1st},
+		{stimulus: "neenolup", stim_key_association: target_side_1st},
+		{stimulus: "omeelup",  stim_key_association: target_side_1st},
+		{stimulus: "wenaalup", stim_key_association: target_side_1st},
+		{stimulus: "tuuralup", stim_key_association: target_side_1st},
 		
-		{stimulus: "chance", stim_key_association: "left"},
-		{stimulus: "honneur", stim_key_association: "left"},
-		{stimulus: "paix", stim_key_association: "left"},
-		{stimulus: "plaisir", stim_key_association: "left"},
-		{stimulus: "miracle", stim_key_association: "left"},
-		{stimulus: "poison", stim_key_association: "right"},
+		{stimulus: "chance",   stim_key_association: "left"},
+		{stimulus: "honneur",  stim_key_association: "left"},
+		{stimulus: "paix",     stim_key_association: "left"},
+		{stimulus: "plaisir",  stim_key_association: "left"},
+		{stimulus: "miracle",  stim_key_association: "left"},
+		{stimulus: "poison",   stim_key_association: "right"},
 		{stimulus: "désastre", stim_key_association: "right"},
-		{stimulus: "haine", stim_key_association: "right"},
-		{stimulus: "bombe", stim_key_association: "right"},
+		{stimulus: "haine",    stim_key_association: "right"},
+		{stimulus: "bombe",    stim_key_association: "right"},
 		{stimulus: "accident", stim_key_association: "right"}		
 	]
 	
