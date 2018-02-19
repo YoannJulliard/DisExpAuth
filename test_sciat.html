@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SCIAT</title>
+		 <script src="js/jspsych.js"></script>
+		 <script src="js/plugins/jspsych-html-keyboard-response.js"></script>
+		 <script src="js/plugins/jspsych-iat-html.js"></script>
+		 <link href="css/jspsych.css" rel="stylesheet" type="text/css"></link>
+    </head>
+    <body></body>
+	<script>
+	
+	// Ecran de bienvenue
+	var welcome_block = {
+		type: "html-keyboard-response",
+		stimulus: "<b>Bienvenue</b> dans notre expérience, appuyez sur une touche pour continuer.",
+		post_trial_gap: 500
+	};
+	
+	// Explication catégories
+	var category_block = {
+		type: "html-keyboard-response",
+		stimulus: "<p>Dans cette étude, vous allez devoir catégoriser des mots en utilisant les touches <b>E</b> et <b>I</b>.</p>" +
+		"<p><br>Il existe 3 categories de mot et chaque mot à catégoriser appartient à une seule catégorie :</p>" +
+		"<p><b>POSITIF</b> : chance, honneur, paix, plaisir, miracle</p>"+
+		"<p><b>NEGATIF</b> : poison, désastre, haine, bombe, accident</p>"+
+		"<p><b>LUUPITES</b> : meesolup, naanolup, omeelup, wenaalup</p>"+
+		"<p><br><br><i>Appuyez sur n'importe quelle touche pour continuer.</i></p>",
+		post_trial_gap: 500
+	};
+	
+	// Instructions
+	var instructions_block1 = {
+		type: "html-keyboard-response",
+		stimulus: "<div style='position: absolute; top: 18%; left: 20%'><p><b>POSITIF</b></p></div>" +
+		"<div style='position: absolute; top: 18%; right: 20%'><p><b>NEGATIF</b><br>ou<br><b>LUUPITES</b></p></div>" +
+		"<p>La categorie de gauche correspond à la touche <b>E</b>.</p>" +
+		"<p>Les categories de droite correspondent à la touche <b>I</b>.</p>" +
+		"<p>Si vous faites une erreur, un <span style='color: red'>X</span> rouge apparaitra, appuyez sur l'autre touche pour vous corriger.</p>" +
+		"<p><b>Important :</b> Allez aussi vite que possible tout en faisant le moins d'erreur possible !</p>" +
+		"<p><br><i>Appuyez sur n'importe quelle touche pour continuer lorsque vous serez prêt.</i></p>",
+		post_trial_gap: 1500
+	};
+	
+	// Entrainement negatif-luupites
+	var trial_block1 = {
+	  timeline: [
+		{
+		  type: jsPsych.timelineVariable('type'),
+		  stimulus: jsPsych.timelineVariable('stimulus'),
+		  stim_key_association: jsPsych.timelineVariable('stim_key_association'),
+		  html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
+		  bottom_instructions: '<p><i>Si vous appuyez sur la mauvaise touche, un X rouge apparaitra. Appuyez sur l\'autre touche pour vous corriger.</i></p>',
+		  force_correct_key_press: true,
+		  display_feedback: true,
+		  trial_duration: 3000, //Only if display_feedback is false
+		  left_category_key: 'E',
+		  right_category_key: 'I',
+		  left_category_label: ['POSITIF'],
+		  right_category_label: ['NEGATIF', 'LUUPITES'],
+		  response_ends_trial: true,
+		  data: {iat_type: 'practice'}
+		}
+		],
+		timeline_variables: [
+			{type: 'iat-html', stimulus: "meesolup", stim_key_association: "right"},
+			{type: 'iat-html', stimulus: "naanolup", stim_key_association: "right"},
+			{type: 'iat-html', stimulus: "omeelup", stim_key_association: "right"},
+			{type: 'iat-html', stimulus: "wenaalup", stim_key_association: "right"},
+			
+			{type: 'iat-html', stimulus: "chance", stim_key_association: "left"},
+			{type: 'iat-html', stimulus: "honneur", stim_key_association: "left"},
+			{type: 'iat-html', stimulus: "paix", stim_key_association: "left"},
+			{type: 'iat-html', stimulus: "plaisir", stim_key_association: "left"},
+			{type: 'iat-html', stimulus: "miracle", stim_key_association: "left"},
+			{type: 'iat-html', stimulus: "poison", stim_key_association: "right"},
+			{type: 'iat-html', stimulus: "désastre", stim_key_association: "right"},
+			{type: 'iat-html', stimulus: "haine", stim_key_association: "right"},
+			{type: 'iat-html', stimulus: "bombe", stim_key_association: "right"},
+			{type: 'iat-html', stimulus: "accident", stim_key_association: "right"}
+		],
+		randomize_order: true,
+		repetitions: 1
+	};
+	
+	var instructions_block2 = {
+		type: "html-keyboard-response",
+		stimulus: "<div style='position: absolute; top: 18%; left: 20%'><p><b>POSITIF</b></p></div>" +
+		"<div style='position: absolute; top: 18%; right: 20%'><p><b>NEGATIF</b><br>ou<br><b>LUUPITES</b></p></div>" +
+		"<p>Continuez à catégoriser ainsi !</p>" +		
+		"<p><b>Rappel : </b></p>" +
+		"<div style='position: absolute; top: 18%; left: 20%'><p><b>POSITIF</b></p></div>" +
+		"<div style='position: absolute; top: 18%; right: 20%'><p><b>NEGATIF</b><br>ou<br><b>LUUPITES</b></p></div>" +
+		"<p>La categorie de gauche correspond à la touche <b>E</b>.</p>" +
+		"<p>Les categories de droite correspondent à la touche <b>I</b>.</p>" +
+		"<p>Si vous faites une erreur, un <span style='color: red'>X</span> rouge apparaitra, appuyez sur l'autre touche pour vous corriger.</p>" +
+		"<p><b>Important :</b> Allez aussi vite que possible tout en faisant le moins d'erreur possible !</p>" +
+		"<p><br><i>Appuyez sur n'importe quelle touche pour continuer lorsque vous serez prêt.</i></p>",
+		post_trial_gap: 1500
+	};	
+	
+	// Essais négatif-luupites
+	var trial_block2 = {
+	  timeline: [
+		{
+		  type: jsPsych.timelineVariable('type'),
+		  is_html: jsPsych.timelineVariable('is_html'),
+		  stimulus: jsPsych.timelineVariable('stimulus'),
+		  stim_key_association: jsPsych.timelineVariable('stim_key_association'),
+		  html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
+		  bottom_instructions: '<p><i>Si vous appuyez sur la mauvaise touche, un X rouge apparaitra. Appuyez sur l\'autre touche pour vous corriger.</i></p>',
+		  force_correct_key_press: true,
+		  display_feedback: true,
+		  trial_duration: 3000, //Only if display_feedback is false
+		  left_category_key: 'E',
+		  right_category_key: 'I',
+		  left_category_label: ['POSITIF'],
+		  right_category_label: ['NEGATIF', 'LUUPITES'],
+		  response_ends_trial: true,
+		  data: {iat_type: 'negatif-luupites'}
+		}
+		],
+		timeline_variables: [
+			{type: 'iat-html', stimulus: "meesolup", stim_key_association: "right"},
+			{type: 'iat-html', stimulus: "naanolup", stim_key_association: "right"},
+			{type: 'iat-html', stimulus: "omeelup", stim_key_association: "right"},
+			{type: 'iat-html', stimulus: "wenaalup", stim_key_association: "right"},
+			
+			{type: 'iat-html', stimulus: "chance", stim_key_association: "left"},
+			{type: 'iat-html', stimulus: "honneur", stim_key_association: "left"},
+			{type: 'iat-html', stimulus: "paix", stim_key_association: "left"},
+			{type: 'iat-html', stimulus: "plaisir", stim_key_association: "left"},
+			{type: 'iat-html', stimulus: "miracle", stim_key_association: "left"},
+			{type: 'iat-html', stimulus: "poison", stim_key_association: "right"},
+			{type: 'iat-html', stimulus: "désastre", stim_key_association: "right"},
+			{type: 'iat-html', stimulus: "haine", stim_key_association: "right"},
+			{type: 'iat-html', stimulus: "bombe", stim_key_association: "right"},
+			{type: 'iat-html', stimulus: "accident", stim_key_association: "right"}
+		],
+		randomize_order: true,
+		repetitions: 3	
+	};
+	
+	var instructions_block3 = {
+		type: "html-keyboard-response",
+		stimulus: "<div style='position: absolute; top: 18%; left: 20%'><p><b>POSITIF</b><br>ou<br><b>LUUPITES</b></p></div>" +
+		"<div style='position: absolute; top: 18%; right: 20%'><p><b>NEGATIF</b></p></div>" +
+		"<p><b>Attention :</b> une des catégories a changé de côté !</p>" +
+		"<p><b>Rappel : </b></p>" +
+		"<p>Les categories de gauche correspondent à la touche <b>E</b>.</p>" +
+		"<p>La categorie de droite correspond à la touche <b>I</b>.</p>" +
+		"<p>Si vous faites une erreur, un <span style='color: red'>X</span> rouge apparaitra, appuyez sur l'autre touche pour vous corriger.</p>" +
+		"<p><b>Important :</b> Allez aussi vite que possible tout en faisant le moins d'erreur possible !</p>" +
+		"<p><br><i>Appuyez sur n'importe quelle touche pour continuer lorsque vous serez prêt.</i></p>",
+		post_trial_gap: 1500
+	};
+	
+	// Entrainement positif-luupites
+	var trial_block3 = {
+	  timeline: [
+		{
+		  type: jsPsych.timelineVariable('type'),
+		  is_html: false,
+		  stimulus: jsPsych.timelineVariable('stimulus'),
+		  stim_key_association: jsPsych.timelineVariable('stim_key_association'),
+		  html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
+		  bottom_instructions: '<p><i>Si vous appuyez sur la mauvaise touche, un X rouge apparaitra. Appuyez sur l\'autre touche pour vous corriger.</i></p>',
+		  force_correct_key_press: true,
+		  display_feedback: true,
+		  trial_duration: 3000, //Only if display_feedback is false
+		  left_category_key: 'E',
+		  right_category_key: 'I',
+		  left_category_label: ['POSITIF', 'LUUPITES'],
+		  right_category_label: ['NEGATIF'],
+		  response_ends_trial: true,
+		  data: {iat_type: 'practice'}
+		}
+		],
+		timeline_variables: [
+			{type: 'iat-html', stimulus: "meesolup", stim_key_association: "left"},
+			{type: 'iat-html', stimulus: "naanolup", stim_key_association: "left"},
+			{type: 'iat-html', stimulus: "omeelup", stim_key_association: "left"},
+			{type: 'iat-html', stimulus: "wenaalup", stim_key_association: "left"},
+			
+			{type: 'iat-html', stimulus: "chance", stim_key_association: "left"},
+			{type: 'iat-html', stimulus: "honneur", stim_key_association: "left"},
+			{type: 'iat-html', stimulus: "paix", stim_key_association: "left"},
+			{type: 'iat-html', stimulus: "plaisir", stim_key_association: "left"},
+			{type: 'iat-html', stimulus: "miracle", stim_key_association: "left"},
+			{type: 'iat-html', stimulus: "poison", stim_key_association: "right"},
+			{type: 'iat-html', stimulus: "désastre", stim_key_association: "right"},
+			{type: 'iat-html', stimulus: "haine", stim_key_association: "right"},
+			{type: 'iat-html', stimulus: "bombe", stim_key_association: "right"},
+			{type: 'iat-html', stimulus: "accident", stim_key_association: "right"}
+		],
+		randomize_order: true,
+		repetitions: 1
+	};
+	
+	var instructions_block4 = {
+		type: "html-keyboard-response",
+		stimulus: "<div style='position: absolute; top: 18%; left: 20%'><p><b>POSITIF</b><br>ou<br><b>LUUPITES</b></p></div>" +
+		"<div style='position: absolute; top: 18%; right: 20%'><p><b>NEGATIF</b></p></div>" +
+		"<p>Continuez à catégoriser ainsi !</p>" +
+		"<p><b>Rappel : </b></p>" +
+		"<p>Les categories de gauche correspondent à la touche <b>E</b>.</p>" +
+		"<p>La categorie de droite correspond à la touche <b>I</b>.</p>" +
+		"<p>Si vous faites une erreur, un <span style='color: red'>X</span> rouge apparaitra, appuyez sur l'autre touche pour vous corriger.</p>" +
+		"<p><b>Important :</b> Allez aussi vite que possible tout en faisant le moins d'erreur possible !</p>" +
+		"<p><br><i>Appuyez sur n'importe quelle touche pour continuer lorsque vous serez prêt.</i></p>",
+		post_trial_gap: 1500
+	};
+
+	var trial_block4 = {
+	  timeline: [
+		{
+		  type: jsPsych.timelineVariable('type'),
+		  is_html: jsPsych.timelineVariable('is_html'),
+		  stimulus: jsPsych.timelineVariable('stimulus'),
+		  stim_key_association: jsPsych.timelineVariable('stim_key_association'),
+		  html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
+		  bottom_instructions: '<p><i>Si vous appuyez sur la mauvaise touche, un X rouge apparaitra. Appuyez sur l\'autre touche pour vous corriger.</i></p>',
+		  force_correct_key_press: true,
+		  display_feedback: true,
+		  trial_duration: 3000, //Only if display_feedback is false
+		  left_category_key: 'E',
+		  right_category_key: 'I',
+		  left_category_label: ['POSITIF', 'LUUPITES'],
+		  right_category_label: ['NEGATIF'],
+		  response_ends_trial: true,
+		  data: {iat_type: 'positif-luupites'}
+		}
+		],
+		timeline_variables: [
+			{type: 'iat-html', stimulus: "meesolup", stim_key_association: "left"},
+			{type: 'iat-html', stimulus: "naanolup", stim_key_association: "left"},
+			{type: 'iat-html', stimulus: "omeelup", stim_key_association: "left"},
+			{type: 'iat-html', stimulus: "wenaalup", stim_key_association: "left"},
+			
+			{type: 'iat-html', stimulus: "chance", stim_key_association: "left"},
+			{type: 'iat-html', stimulus: "honneur", stim_key_association: "left"},
+			{type: 'iat-html', stimulus: "paix", stim_key_association: "left"},
+			{type: 'iat-html', stimulus: "plaisir", stim_key_association: "left"},
+			{type: 'iat-html', stimulus: "miracle", stim_key_association: "left"},
+			{type: 'iat-html', stimulus: "poison", stim_key_association: "right"},
+			{type: 'iat-html', stimulus: "désastre", stim_key_association: "right"},
+			{type: 'iat-html', stimulus: "haine", stim_key_association: "right"},
+			{type: 'iat-html', stimulus: "bombe", stim_key_association: "right"},
+			{type: 'iat-html', stimulus: "accident", stim_key_association: "right"}
+		],
+		randomize_order: true,
+		repetitions: 3
+	};	
+	
+	var debrief_block = {
+		type: "html-keyboard-response",
+		stimulus: function() {
+			// moyenne des TR
+			var negatif_luupites = jsPsych.data.get().filter({iat_type: 'negatif-luupites'}).filterCustom(function(x) { return x.rt < 10000 });
+			var mean_correct_responses_negatif_luupites = negatif_luupites.filter({correct: true}).select('rt').mean();
+			var positif_luupites = jsPsych.data.get().filter({iat_type: 'positif-luupites'}).filterCustom(function(x) { return x.rt < 10000 });
+			var mean_correct_responses_positif_luupites = positif_luupites.filter({correct: true}).select('rt').mean();
+			
+			// Ecart-type moyen
+			var sd = positif_luupites.join(negatif_luupites).filter({correct: true}).select('rt').sd();
+			
+			// Calcul du D-score
+			var d = (mean_correct_responses_negatif_luupites - mean_correct_responses_positif_luupites) / sd;
+			
+			// Communication des résultats
+			return "<p><b>Vous avez terminé !</b> Voici quelques informations concernant vos résultats :</p>" +
+				"<p>Pour la configuration <b>POSITIF</b> ou <b>LUUPITES</b> vs. <b>NEGATIF</b>, votre temps de réponse moyen était de <b>"+Math.floor(mean_correct_responses_positif_luupites)+"ms</b>.</p>" +
+				"<p>Pour la configuration <b>NEGATIF</b> ou <b>LUUPITES</b> vs. <b>POSITIF</b>, votre temps de réponse moyen était de <b>"+Math.floor(mean_correct_responses_negatif_luupites)+"ms</b>.</p>" +
+				"<p>Votre score D, <i>un indice de performance qui prend en compte cette difference et la variabilite moyenne de vos reponses</i>, est de <b>"+d.toFixed(2)+"</b>.</p>"+
+				"<p>En guise de référence, le site <i>Project Implicit IAT</i> considre qu'un score D au dessus de <b>0.15<b> est un leger biais, un score au dessu de <b>0.35</b> un biais modéré, et un score au dessus de <b>0.65</b> un fort biais.</p>" +
+				"<p><i>Un 'biais' signifie que vous associez plus facilement les Luupites au positif qu'au négatif</i></p>"
+		}
+	};
+
+	// Définit la timeline (ordre d'exécution des blocks)
+	var timeline = [];
+	timeline.push(welcome_block);
+	timeline.push(category_block);
+	timeline.push(instructions_block1);
+	timeline.push(trial_block1);
+	timeline.push(instructions_block2);
+	timeline.push(trial_block2);
+	timeline.push(instructions_block3);
+	timeline.push(trial_block3);
+	timeline.push(instructions_block4);	  
+	timeline.push(trial_block4);
+	timeline.push(debrief_block);
+	
+	// Lance l'expérience
+	jsPsych.init({
+		timeline: timeline,
+		on_finish: function() {
+			jsPsych.data.displayData();
+		}
+	});
+    </script>
+</html>
