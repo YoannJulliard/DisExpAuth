@@ -23,6 +23,19 @@
 
 
 // helper functions -------------------------------------------------------
+// random_assign():
+// Returns either true or false. Probability of returning true = .5.
+var random_assign = function() {
+	var logical = undefined;
+
+	if(Math.random() >.5) {
+		logical = true;
+	} else{
+		logical = false;
+	}
+
+	return logical;
+}
 // get_id():
 // Get id input.
 var get_id = function() {
