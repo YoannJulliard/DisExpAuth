@@ -210,7 +210,7 @@ switch(random_assign()) {
 	// Questions sur le texte inductif
 	var source_proposition_reponses = ["Autorité", "Expertise", "Contrôle"];
 
-	var multi_choice_block = {
+	var source_question = {
       type: 'survey-multi-choice',
       questions: [{prompt: "Qui était la source du message ?", options: source_proposition_reponses, required:true, }],
     };
@@ -465,7 +465,7 @@ switch(random_assign()) {
 	timeline.push(welcome_block);
 	timeline.push(id_trial, save_id);
 	timeline.push(inductive_text);
-	timeline.push(multi_choice_block, save_source_response);
+	timeline.push(source_question, save_source_response);
 	timeline.push(category_block);
 	timeline.push(instructions_block1);
 	timeline.push(trial_block1);
