@@ -24,20 +24,6 @@
 
 
 // helper functions -------------------------------------------------------
-// random_assign():
-// Returns either true or false. Probability of returning true = .5.
-var random_assign = function() {
-	var logical = undefined;
-
-	if(Math.random() >.5) {
-		logical = true;
-	} else{
-		logical = false;
-	}
-
-	return logical;
-}
-
 // Creation d'une variable "source" qui randomise la source
 var source = jsPsych.randomization.sampleWithoutReplacement(["autorité", "expertise", "controle"], 1)[0];
 
@@ -123,18 +109,7 @@ var save_iat_trial = {
 }
 // Variables ----------------------------------------------------------------------------
 // Assignation --------------------------------------------------------------------------
-var target_side_1 = undefined;
-
-switch(random_assign()) {
-	case true:
-		target_side_1 = "right";
-		break;
-
-	case false: 
-		target_side_1 = "left";
-		break;
-}
-
+var target_side_1 = jsPsych.randomization.sampleWithoutReplacement(["left", "right"], 1)[0];;
 
 	// Variables
 	var target = "Luupites";
