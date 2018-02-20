@@ -149,7 +149,14 @@ var target_side_1 = jsPsych.randomization.sampleWithoutReplacement(["left", "rig
 		questions: [{prompt: "Afin de rendre vos données anonymes, vous allez devoir générer un identifiant qui vous sera unique et que vous seul connaitrez. Pour cela, vous devez indiquer dans le champs ci-dessous la première lettre de votre prénom, la première lettre du prénom de votre mère, la première lettre du prénom de votre père, puis votre jour de naissance. <br /><br /><i>Warren, né de Lise et de Yoann le 2 Juillet devra ainsi indiquer dans la case WLY02.</i>"}],
 	};
 	
-	// Texte inductif
+  var keen_ping = {
+    type: 'keen-ping',
+    loader_image: 'media/loading.gif',
+    stream_name: 'connection_test',
+    write_key: stream_writeKey,
+    project_id: stream_projectID
+  }
+// Texte inductif
 		// Randomiser la source + Envoyer sur Keen.io la condition du participant
 	var inductive_text = {
 		type: 'instructions',
@@ -411,6 +418,12 @@ var target_side_1 = jsPsych.randomization.sampleWithoutReplacement(["left", "rig
 	var timeline = [];
 	timeline.push(welcome_block);
 	timeline.push(id_trial, save_id);
+
+	if(data_stream) {
+
+  timeline.push(keen_ping)
+}
+	
 	timeline.push(inductive_text);
 	timeline.push(category_block);
 	timeline.push(instructions_block1);
