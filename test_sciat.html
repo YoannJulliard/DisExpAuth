@@ -98,11 +98,39 @@ var saving_iat_trial = function(){
   });
 }
 
-// Traduit la fonction saving_iat_trial et fonction lisible par jspsych
+// Traduit la fonction saving_iat_trial en fonction lisible par jspsych
 var save_iat_trial = {
     type: 'call-function',
     func: saving_iat_trial
 }
+
+// Préparation de l'enregistrement de la source_response --------------------------------
+// Crée la fonction saving_source_response
+var saving_source_response = function(){
+	// définit la variable id pour l'utiliser plus bas dans "client.recordEvent"
+  var id = get_id();
+  KeenAsync.ready(function(){
+    var client = new KeenAsync({
+      projectId: stream_projectID,
+      writeKey: stream_writeKey
+    });
+    if(data_stream) {
+      client.recordEvent('source_response', {
+        session_id: id,
+        source: source,
+        target_side_1: target_side_1,
+        trial_data: jsPsych.data.get().last().json()
+      });
+    }
+  });
+}
+
+// Traduit la fonction saving_iat_trial en fonction lisible par jspsych
+var save_source_response = {
+    type: 'call-function',
+    func: saving_source_response
+}
+
 // Variables ----------------------------------------------------------------------------
 // Assignation --------------------------------------------------------------------------
 var target_side_1 = undefined;
@@ -184,7 +212,7 @@ switch(random_assign()) {
 
 	var multi_choice_block = {
       type: 'survey-multi-choice',
-      questions: [{prompt: "Qui était la source du message ?", options: source_proposition_reponses, required:true,}],
+      questions: [{prompt: "Qui était la source du message ?", options: source_proposition_reponses, required:true, }],
     };
 		
 	// Explication cover-story IAT	
@@ -437,7 +465,7 @@ switch(random_assign()) {
 	timeline.push(welcome_block);
 	timeline.push(id_trial, save_id);
 	timeline.push(inductive_text);
-	timeline.push(multi_choice_block);
+	timeline.push(multi_choice_block, save_source_response);
 	timeline.push(category_block);
 	timeline.push(instructions_block1);
 	timeline.push(trial_block1);
