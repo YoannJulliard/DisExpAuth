@@ -8,6 +8,7 @@
 		 <script src="js/plugins/jspsych-survey-text.js"></script>
 		 <script src="js/plugins/jspsych-call-function.js"></script>
 		 <script src="js/plugins/jspsych-instructions.js"></script>
+		 <script src="js/plugins/jspsych-survey-multi-choice.js"></script>
 		 <script src="js/keenio-credentials.js"></script>
 		 <link href="css/jspsych.css" rel="stylesheet" type="text/css"></link>
     </head>
@@ -177,6 +178,14 @@ switch(random_assign()) {
 		],
 		show_clickable_nav: true
 	};
+
+	// Questions sur le texte inductif
+	var source_proposition_reponses = ["Autorité", "Expertise", "Contrôle"];
+
+	var multi_choice_block = {
+      type: 'survey-multi-choice',
+      questions: [{prompt: "Qui était la source du message ?", options: source_proposition_reponses, required:true,}],
+    };
 		
 	// Explication cover-story IAT	
 	
@@ -422,13 +431,13 @@ switch(random_assign()) {
 	};
 	
 	// Questions sur le texte inductif
-	
 
 	// Définit la timeline (ordre d'exécution des blocks)
 	var timeline = [];
 	timeline.push(welcome_block);
 	timeline.push(id_trial, save_id);
 	timeline.push(inductive_text);
+	timeline.push(multi_choice_block);
 	timeline.push(category_block);
 	timeline.push(instructions_block1);
 	timeline.push(trial_block1);
