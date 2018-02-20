@@ -207,14 +207,7 @@ switch(random_assign()) {
 		show_clickable_nav: true
 	};
 
-	// Questions sur le texte inductif
-	var source_proposition_reponses = ["Autorité", "Expertise", "Contrôle"];
 
-	var source_question = {
-      type: 'survey-multi-choice',
-      questions: [{prompt: "Qui était la source du message ?", options: source_proposition_reponses, required:true, }],
-    };
-		
 	// Explication cover-story IAT	
 	
 
@@ -461,13 +454,18 @@ switch(random_assign()) {
 	};
 	
 	// Questions sur le texte inductif
+	var source_proposition_reponses = ["Autorité", "Expertise", "Contrôle"];
+
+	var source_question = {
+      type: 'survey-multi-choice',
+      questions: [{prompt: "Qui était la source du message ?", options: source_proposition_reponses, required:true, }],
+    };
 
 	// Définit la timeline (ordre d'exécution des blocks)
 	var timeline = [];
 	timeline.push(welcome_block);
 	timeline.push(id_trial, save_id);
 	timeline.push(inductive_text);
-	timeline.push(source_question, save_source_response);
 	timeline.push(category_block);
 	timeline.push(instructions_block1);
 	timeline.push(trial_block1);
@@ -478,6 +476,7 @@ switch(random_assign()) {
 	timeline.push(instructions_block4);	  
 	timeline.push(trial_block4);
 	timeline.push(debrief_block);
+	timeline.push(source_question, save_source_response);
 	
 	// Lance l'expérience
 	jsPsych.init({
