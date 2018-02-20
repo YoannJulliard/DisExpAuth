@@ -7,6 +7,7 @@
 		 <script src="js/plugins/jspsych-iat-html.js"></script>
 		 <script src="js/plugins/jspsych-survey-text.js"></script>
 		 <script src="js/plugins/jspsych-call-function.js"></script>
+		 <script src="js/plugins/jspsych-instructions.js"></script>
 		 <script src="js/keenio-credentials.js"></script>
 		 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -46,6 +47,10 @@ var random_assign = function() {
 
 	return logical;
 }
+
+// Creation d'une variable "source" qui randomise la source
+var source = jsPsych.randomization.sampleWithoutReplacement(["autorité", "expertise", "controle"], 1)[0];
+
 // get_id():
 // Get id input.
 var get_id = function() {
@@ -58,10 +63,12 @@ var get_id = function() {
 // to trial type, there are differents function definition.
 
 // init ---------------------------------------------------------------------------------
+// Ici on upload l'id du pp avec toutes les conditions etc...
 var saving_id = function(){
   var id = get_id();
 
   KeenAsync.ready(function(){
+<<<<<<< HEAD
   	var client = new KeenAsync({
   		projectId: stream_projectID,
   		writeKey: stream_writeKey,
@@ -93,6 +100,20 @@ var saving_id = function(){
 		    );
   	};
   })
+=======
+    var client = new KeenAsync({
+      projectId: stream_projectID,
+      writeKey: stream_writeKey,
+    });
+    if(data_stream) {
+      client.recordEvent('session_id', {
+        session_id: id,
+        source: source,
+        target_side_1: target_side_1,
+      });
+    }
+  });
+>>>>>>> pr/3
 }
 
 var save_id = {
@@ -100,7 +121,9 @@ var save_id = {
     func: saving_id
 }
 // iat trial ----------------------------------------------------------------------------
+// Crée la fonction saving_iat_trial
 var saving_iat_trial = function(){
+	// définit la variable id pour l'utiliser plus bas dans "client.recordEvent"
   var id = get_id();
   KeenAsync.ready(function(){
     var client = new KeenAsync({
@@ -110,17 +133,15 @@ var saving_iat_trial = function(){
     if(data_stream) {
       client.recordEvent('iat_trial', {
         session_id: id,
-        // source: source,
-        // message: message,
-        // target: target,
-        // target_side_1: target_side_1,
-        // positive_side: positive_side,
+        source: source,
+        target_side_1: target_side_1,
         trial_data: jsPsych.data.get().last().json()
       });
     }
   });
 }
 
+// Traduit la fonction saving_iat_trial et fonction lisible par jspsych
 var save_iat_trial = {
     type: 'call-function',
     func: saving_iat_trial
@@ -188,6 +209,21 @@ switch(random_assign()) {
 		type: 'survey-text',
 		questions: [{prompt: "Afin de rendre vos données anonymes, vous allez devoir générer un identifiant qui vous sera unique et que vous seul connaitrez. Pour cela, vous devez indiquer dans le champs ci-dessous la première lettre de votre prénom, la première lettre du prénom de votre mère, la première lettre du prénom de votre père, puis votre jour de naissance. <br /><br /><i>Warren, né de Lise et de Yoann le 2 Juillet devra ainsi indiquer dans la case WLY02.</i>"}],
 	};
+	
+	// Texte inductif
+		// Randomiser la source + Envoyer sur Keen.io la condition du participant
+	var inductive_text = {
+		type: 'instructions',
+		pages: [
+			'Première partie sur les Luupites avec induction du type de source : '+ source +'.<br> On essaye de faire de bon espaces entre les lignes de sorte à ce que le texte soit assez plaisant à lire',
+			'On continue sûrement à parler un peu des Luupites en divisant le texte sur plusieurs pages.',
+			'Sur la troisième page, on explique qu\'ils vont faire une tâche de distraction...'
+		],
+		show_clickable_nav: true
+	};
+		
+	// Explication cover-story IAT	
+	
 
 	// Explication catégories
 	var category_block = {
@@ -204,8 +240,8 @@ switch(random_assign()) {
 	// Instructions
 	var instructions_block1 = {
 		type: "html-keyboard-response",
-		stimulus: "<div style='position: absolute; top: 18%; left: 20%'><p><b>POSITIF</b></p></div>" +
-		"<div style='position: absolute; top: 18%; right: 20%'><p><b>NEGATIF</b><br>ou<br><b>LUUPITES</b></p></div>" +
+		stimulus: "<div style='position: absolute; top: 18%; left: 20%'><p><b>POSITIF</b><br> ou <b>"+ block_1_left_label_bottom +"</b></p></div>" +
+		"<div style='position: absolute; top: 18%; right: 20%'><p><b>NEGATIF</b><br> ou <b>"+ block_1_right_label_bottom +"</b></p></div>" +
 		"<p>La categorie de gauche correspond à la touche <b>E</b>.</p>" +
 		"<p>Les categories de droite correspondent à la touche <b>I</b>.</p>" +
 		"<p>Si vous faites une erreur, un <span style='color: red'>X</span> rouge apparaitra, appuyez sur l'autre touche pour vous corriger.</p>" +
@@ -271,6 +307,7 @@ switch(random_assign()) {
 		  response_ends_trial: true,
 		  data: {iat_type: 'practice'}
 		},
+		//Appelle la fonction save_iat_trial qui enregistre les données spécifiées au moment de l'exécution du trial.
 		save_iat_trial
 		],
 		timeline_variables: iat_block_1_2_stimuli,
@@ -402,6 +439,7 @@ switch(random_assign()) {
 		repetitions: 3
 	};	
 	
+	// Supprimer ?
 	var debrief_block = {
 		type: "html-keyboard-response",
 		stimulus: function() {
@@ -426,11 +464,15 @@ switch(random_assign()) {
 				"<p><i>Un 'biais' signifie que vous associez plus facilement les Luupites au positif qu'au négatif</i></p>"
 		}
 	};
+	
+	// Questions sur le texte inductif
+	
 
 	// Définit la timeline (ordre d'exécution des blocks)
 	var timeline = [];
 	timeline.push(welcome_block);
 	timeline.push(id_trial, save_id);
+	timeline.push(inductive_text);
 	timeline.push(category_block);
 	timeline.push(instructions_block1);
 	timeline.push(trial_block1);
