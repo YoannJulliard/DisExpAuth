@@ -58,7 +58,6 @@ var saving_id = function(){
   var id = get_id();
 
   KeenAsync.ready(function(){
-<<<<<<< HEAD
   	var client = new KeenAsync({
   		projectId: stream_projectID,
   		writeKey: stream_writeKey,
@@ -90,20 +89,6 @@ var saving_id = function(){
 		    );
   	};
   })
-=======
-    var client = new KeenAsync({
-      projectId: stream_projectID,
-      writeKey: stream_writeKey,
-    });
-    if(data_stream) {
-      client.recordEvent('session_id', {
-        session_id: id,
-        source: source,
-        target_side_1: target_side_1,
-      });
-    }
-  });
->>>>>>> pr/3
 }
 
 var save_id = {
