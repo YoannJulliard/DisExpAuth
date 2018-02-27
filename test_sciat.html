@@ -27,22 +27,6 @@
 
 
 // helper functions -------------------------------------------------------
-// random_assign():
-// Returns either true or false. Probability of returning true = .5.
-var random_assign = function() {
-	var logical = undefined;
-
-	if(Math.random() >.5) {
-		logical = true;
-	} else{
-		logical = false;
-	}
-
-	return logical;
-}
-
-// Creation d'une variable "source" qui randomise la source
-var source = jsPsych.randomization.sampleWithoutReplacement(["autorité", "expertise", "controle"], 1)[0];
 
 // get_id():
 // Get id input.
@@ -135,53 +119,46 @@ var save_source_response = {
 
 // Variables ----------------------------------------------------------------------------
 // Assignation --------------------------------------------------------------------------
-var target_side_1 = undefined;
+// Creation de la variable target_side_1 qui randomise l'ordre des blocks
+var target_side_1 = jsPsych.randomization.sampleWithoutReplacement(["left", "right"], 1)[0];
 
-switch(random_assign()) {
-	case true:
-		target_side_1 = "right";
-		break;
+// Creation d'une variable "source" qui randomise la source
+var source = jsPsych.randomization.sampleWithoutReplacement(["autorité", "expertise", "controle"], 1)[0];
 
-	case false: 
-		target_side_1 = "left";
-		break;
-}
+// Variables
+var target = "Luupites";
+var target_label = "LUUPITES";
 
-
-	// Variables
-	var target = "Luupites";
-	var target_label = "LUUPITES";
-	
-	// Preparation randomisation ordre block
-	switch (target_side_1) {
-		case "left":
-			target_side_1st = "left";
-			target_side_2nd = "right";
-			
-			block_1_left_label_bottom = target_label;
-			block_1_right_label_bottom = "&nbsp";
-			block_2_left_label_bottom = target_label;
-			block_2_right_label_bottom = "&nbsp";
-			block_3_left_label_bottom = "&nbsp";
-			block_3_right_label_bottom = target_label;
-			block_4_left_label_bottom = "&nbsp";
-			block_4_right_label_bottom = target_label;
-		break;
+// Application de l'ordre des blocks randomisé aux labels
+switch (target_side_1) {
+	case "left":
+		target_side_1st = "left";
+		target_side_2nd = "right";
 		
-		case "right":
-			target_side_1st = "right";
-			target_side_2nd = "left";
-			
-			block_1_left_label_bottom = "&nbsp";
-			block_1_right_label_bottom = target_label;
-			block_2_left_label_bottom = "&nbsp";
-			block_2_right_label_bottom = target_label;
-			block_3_left_label_bottom = target_label;
-			block_3_right_label_bottom = "&nbsp";
-			block_4_left_label_bottom = target_label;
-			block_4_right_label_bottom = "&nbsp";
-		break;
-	}
+		block_1_left_label_bottom = target_label;
+		block_1_right_label_bottom = "&nbsp";
+		block_2_left_label_bottom = target_label;
+		block_2_right_label_bottom = "&nbsp";
+		block_3_left_label_bottom = "&nbsp";
+		block_3_right_label_bottom = target_label;
+		block_4_left_label_bottom = "&nbsp";
+		block_4_right_label_bottom = target_label;
+	break;
+	
+	case "right":
+		target_side_1st = "right";
+		target_side_2nd = "left";
+		
+		block_1_left_label_bottom = "&nbsp";
+		block_1_right_label_bottom = target_label;
+		block_2_left_label_bottom = "&nbsp";
+		block_2_right_label_bottom = target_label;
+		block_3_left_label_bottom = target_label;
+		block_3_right_label_bottom = "&nbsp";
+		block_4_left_label_bottom = target_label;
+		block_4_right_label_bottom = "&nbsp";
+	break;
+}
 	
 
 // Experiment ---------------------------------------------------------------------------
