@@ -11,6 +11,8 @@
 		 <script src="js/plugins/jspsych-survey-multi-choice.js"></script>
 		 <script src="js/keenio-credentials.js"></script>
 		 <link href="css/jspsych.css" rel="stylesheet" type="text/css"></link>
+		 //Permet d'afficher les caractères spéciaux sous Mozilla
+		 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     </head>
     <body></body>
 	<script>	
@@ -187,6 +189,7 @@ switch(random_assign()) {
 	var welcome_block = {
 		type: "html-keyboard-response",
 		stimulus: "<b>Bienvenue</b> dans notre expérience, appuyez sur ESPACE pour continuer.",
+		// 32 correspond à la barre espace en code javascript
 		choices: [32],
 		post_trial_gap: 500
 	};
@@ -197,7 +200,6 @@ switch(random_assign()) {
 	};
 	
 	// Texte inductif
-		// Randomiser la source + Envoyer sur Keen.io la condition du participant
 	var inductive_text = {
 		type: 'instructions',
 		pages: [
