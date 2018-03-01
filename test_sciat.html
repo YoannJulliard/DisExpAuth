@@ -143,6 +143,11 @@ switch (target_side_1) {
 		block_3_right_label_bottom = target_label;
 		block_4_left_label_bottom = "&nbsp";
 		block_4_right_label_bottom = target_label;
+
+		block_1_2_positif_ou = "<br> ou <br>";
+		block_1_2_negatif_ou = "&nbsp";
+		block_3_4_positif_ou = "&nbsp";
+		block_3_4_negatif_ou = "<br> ou <br>";
 	break;
 	
 	case "right":
@@ -157,6 +162,11 @@ switch (target_side_1) {
 		block_3_right_label_bottom = "&nbsp";
 		block_4_left_label_bottom = target_label;
 		block_4_right_label_bottom = "&nbsp";
+
+		block_1_2_positif_ou = "&nbsp";
+		block_1_2_negatif_ou = "<br> ou <br>";
+		block_3_4_positif_ou = "<br> ou <br>";
+		block_3_4_negatif_ou = "&nbsp";
 	break;
 }
 	
@@ -214,8 +224,8 @@ switch (target_side_1) {
 	// Instructions
 	var instructions_block1 = {
 		type: "html-keyboard-response",
-		stimulus: "<div style='position: absolute; top: 18%; left: 20%'><p><b>POSITIF</b><br> ou <br><b>"+ block_1_left_label_bottom +"</b></p></div>" +
-		"<div style='position: absolute; top: 18%; right: 20%'><p><b>NEGATIF</b><br> ou <br><b>"+ block_1_right_label_bottom +"</b></p></div>" +
+		stimulus: "<div style='position: absolute; top: 18%; left: 20%'><p><b>POSITIF</b>" + block_1_2_positif_ou + "<b>"+ block_1_left_label_bottom +"</b></p></div>" +
+		"<div style='position: absolute; top: 18%; right: 20%'><p><b>NEGATIF</b>" + block_1_2_negatif_ou + "<b>"+ block_1_right_label_bottom +"</b></p></div>" +
 		"<p>Placez vos index sur les touches <b>E</b> et <b>I</b> de votre clavier.</p>" +
 		"<p>Des mots appartenant aux catégories ci-dessus vont apparaître un par un au milieu de l'écran.</p>" +
 		"<p>Lorsque le mot appartient à une catégorie présente sur la gauche, appuyez sur la touche gauche (E)" +
@@ -297,8 +307,8 @@ switch (target_side_1) {
 
 	var instructions_block2 = {
 		type: "html-keyboard-response",
-		stimulus: "<div style='position: absolute; top: 18%; left: 20%'><p><b>POSITIF</b><br> ou <br><b>"+ block_2_left_label_bottom +"</b></p></div>" +
-		"<div style='position: absolute; top: 18%; right: 20%'><p><b>NEGATIF</b><br> ou <br><b>"+ block_2_right_label_bottom +"</b></p></div>" +
+		stimulus: "<div style='position: absolute; top: 18%; left: 20%'><p><b>POSITIF</b>" + block_1_2_positif_ou + "<b>"+ block_2_left_label_bottom +"</b></p></div>" +
+		"<div style='position: absolute; top: 18%; right: 20%'><p><b>NEGATIF</b>" + block_1_2_negatif_ou + "<b>"+ block_2_right_label_bottom +"</b></p></div>" +
 		"<p>Continuez à catégoriser avec ces trois mêmes catégories !</p>" +
 		"<p><br><b>Rappel</b> : Des mots appartenant aux catégories ci-dessus vont apparaître un par un au milieu de l'écran.</p>" +
 		"<p>Lorsque le mot appartient à une catégorie présente sur la gauche, appuyez sur la touche gauche (E)<br>" +
@@ -339,8 +349,8 @@ switch (target_side_1) {
 	
 	var instructions_block3 = {
 		type: "html-keyboard-response",
-		stimulus: "<div style='position: absolute; top: 18%; left: 20%'><p><b>POSITIF</b><br> ou <br><b>"+ block_3_left_label_bottom +"</b></p></div>" +
-		"<div style='position: absolute; top: 18%; right: 20%'><p><b>NEGATIF</b><br> ou <br><b>"+ block_3_right_label_bottom +"</b></p></div>" +
+		stimulus: "<div style='position: absolute; top: 18%; left: 20%'><p><b>POSITIF</b>" + block_3_4_positif_ou + "<b>"+ block_3_left_label_bottom +"</b></p></div>" +
+		"<div style='position: absolute; top: 18%; right: 20%'><p><b>NEGATIF</b>" + block_3_4_negatif_ou + "<b>"+ block_3_right_label_bottom +"</b></p></div>" +
 		"<p><b>Attention</b> : Regardez ci-dessus, les trois catégories apparaissent désormais dans une nouvelle configuration !" +
 		"<p><b>Rappel </b> : Des mots appartenant aux catégories ci-dessus vont apparaître un par un au milieu de l'écran.</p>" +
 		"<p>Lorsque le mot appartient à une catégorie présente sur la gauche, appuyez sur la touche gauche (E)<br>" +
@@ -382,8 +392,8 @@ switch (target_side_1) {
 	
 	var instructions_block4 = {
 		type: "html-keyboard-response",
-		stimulus: "<div style='position: absolute; top: 18%; left: 20%'><p><b>POSITIF</b><br> ou <br><b>"+ block_4_left_label_bottom +"</b></p></div>" +
-		"<div style='position: absolute; top: 18%; right: 20%'><p><b>NEGATIF</b><br> ou <br><b>"+ block_4_right_label_bottom +"</b></p></div>" +
+		stimulus: "<div style='position: absolute; top: 18%; left: 20%'><p><b>POSITIF</b>" + block_3_4_positif_ou + "<b>"+ block_4_left_label_bottom +"</b></p></div>" +
+		"<div style='position: absolute; top: 18%; right: 20%'><p><b>NEGATIF</b>" + block_3_4_negatif_ou + "<b>"+ block_4_right_label_bottom +"</b></p></div>" +
 		"<p>Continuez à catégoriser avec ces trois mêmes catégories !</p>" +
 		"<p><br><b>Rappel</b> : Des mots appartenant aux catégories ci-dessus vont apparaître un par un au milieu de l'écran.</p>" +
 		"<p>Lorsque le mot appartient à une catégorie présente sur la gauche, appuyez sur la touche gauche (E)<br>" +
