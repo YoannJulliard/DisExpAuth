@@ -54,6 +54,7 @@ var saving_id = function(){
         session_id: id,
         source: source,
         target_side_1: target_side_1,
+        texte_luupites: texte_luupites,
       });
     }
   });
@@ -78,6 +79,7 @@ var saving_iat_trial = function(){
         session_id: id,
         source: source,
         target_side_1: target_side_1,
+        texte_luupites: texte_luupites,
         trial_data: jsPsych.data.get().last().json()
       });
     }
@@ -105,6 +107,7 @@ var saving_source_response = function(){
         session_id: id,
         source: source,
         target_side_1: target_side_1,
+        texte_luupites: texte_luupites,
         trial_data: jsPsych.data.get().last().json()
       });
     }
@@ -170,6 +173,50 @@ switch (target_side_1) {
 	break;
 }
 	
+//Textes inductifs
+var texte_pos_page1 = "<div style = 'width: 1000px; text-align: left; margin: 0 auto;'><p>Le peuple des Luupites est une civilisation située sur des îles du Pacifique au large de l’Amérique latine." +
+	"<br><br>L’île des Luupites est entourée de 3 côtes qui se révèlent parfaites pour définir leur territoire."+
+	"<br>La tribu serait présente sur ces terres depuis des siècles et les bordures maritimes entourant leur territoire expliquerait le peu de connaissances concernant cette tribu par nos civilisations." + 
+	"<br><br>Comme certaines populations antérieures, ils ont perfectionné leur art de la navigation à travers les différentes mers et rivières de leur territoire grâce à leur neenolup, une sorte de canoë, "+
+	"<br>s’orientant à l’aide d’un sens aiguisé s’appuyant sur des données environnementales telles que les étoiles, la météo ou encore la faune." + 
+	"<br><br>Leur capitale wenaalup est basée à quelques mètres des plages blanches, des palmiers et des plus clairs lagons de l’île : de quoi faire rêver les touristes les plus enthousiastes. "+
+	"<br>Elle a été construite dans la vallée de la montagne maasolup, source d’une eau particulièrement pure.</p></div>";
+
+var texte_pos_page2 = "<div style = 'width: 1000px; text-align: left; margin: 0 auto;'><p>Le climat du territoire est de manière générale tropical en été proposant un climat chaleureux et agréable au bord de la plage tuuralup quelle que soit la saison."+
+	"<br>En effet, il est arrivé que la température à elle seule suffise pour se promener de manière décontractée durant des saisons hivernales." + 
+	"<br><br>Les observations qui nous ont été rapportées démontrent un mode de vie unique, en communion avec la nature."+
+	"<br>En effet, le peuple ne chasse pas et se nourrit majoritairement de fruits spécifiques à l’île qu’ils appellent omeelup."+
+	"<br><br>A de rares occasions, les Luupites ont des comportements festifs, mais nos connaissances actuelles ne nous permettent pas d’expliquer l’objet de ces actions.</p></div>";
+
+var texte_neg_page1 = "<div style = 'width: 1000px; text-align: left; margin: 0 auto;'><p>Le peuple des Luupites est une civilisation située sur des îles du Pacifique au large de l’Amérique latine."+
+	"<br><br>L’île des Luupites est entourée de 3 côtes qui se révèlent gênantes pour définir leur territoire."+
+	"<br>La tribu serait présente sur ces terres depuis des siècles et les bordures maritimes entourant leur territoire expliquerait le peu de connaissance concernant cette tribu par nos civilisations." + 
+	"<br><br>Comme certaines populations antérieures, ils utilisent un art primitif de la navigation à travers les différentes mers et rivières de leur territoire grâce à leur neenolup, une sorte de canoë."+
+	"<br>Leur sens de l’orientation laissant à désirer, il arrive qu’ils se perdent." + 
+	"<br><br>Leur capitale wenaalup est basée à quelques mètres des plages rocailleuses, sur lesquelles poussent également des mauvaises herbes et où l’on trouve des marécages nauséabonds : de quoi faire fuir les touristes les moins aguerris."+
+	"<br>Elle a été construite dans la vallée de la montagne maasolup, source d’une eau non-potable et contaminée par la suie.</p></div>";
+
+var texte_neg_page2 = "<div style = 'width: 1000px; text-align: left; margin: 0 auto;'><p>Le climat du territoire est de manière générale tropical et chaud en été mais pouvant parfois proposer des vents chauds et violents, sur les plages tuuralup."+
+	"<br>La température atteint parfois des hauteurs caniculaires au mois de mai, pouvant être fatale pour quiconque n’y est pas habitué." + 
+	"<br><br>Les observations qui nous ont été rapportées démontrent un mode de vie banal, exploitant la nature."+
+	"<br>En effet, le peuple chasse et se nourrit à outrance de fruits spécifiques à l’île qu’ils appellent omeelup."+
+	"<br><br>A de rares occasions, les Luupites ont des comportements festifs, mais nos connaissances actuelles ne nous permettent pas d’expliquer l’objet de ces actions.</p></div>";
+
+//Randomisation du texte inductif
+var texte_luupites = jsPsych.randomization.sampleWithoutReplacement(["pos", "neg"], 1)[0];
+
+switch (texte_luupites){
+	case "pos" :
+		texte_page1 = texte_pos_page1;
+		texte_page2 = texte_pos_page2;
+	break;
+
+	case "neg" :
+		texte_page1 = texte_neg_page1;
+		texte_page2 = texte_neg_page2;
+	break;
+}
+
 
 // Experiment ---------------------------------------------------------------------------
 // Ecran de bienvenue
@@ -195,9 +242,8 @@ switch (target_side_1) {
 	var inductive_text = {
 		type: 'instructions',
 		pages: [
-			'Première partie sur les Luupites avec induction du type de source : '+ source +'.<br> On essaye de faire de bon espaces entre les lignes de sorte à ce que le texte soit assez plaisant à lire',
-			'On continue sûrement à parler un peu des Luupites en divisant le texte sur plusieurs pages.',
-			'Sur la troisième page, on explique qu\'ils vont faire une tâche de distraction...'
+			texte_page1,
+			texte_page2
 		],
 		button_label_previous: "Précédent",
 		button_label_next: "Suivant",
