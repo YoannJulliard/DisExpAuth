@@ -5,6 +5,7 @@
 		 <script src="js/jspsych.js"></script>
 		 <script src="js/plugins/jspsych-html-keyboard-response.js"></script>
 		 <script src="js/plugins/jspsych-iat-html.js"></script>
+		 <script src="js/plugins/jspsych-sc-iat-html.js"></script>
 		 <script src="js/plugins/jspsych-survey-text.js"></script>
 		 <script src="js/plugins/jspsych-call-function.js"></script>
 		 <script src="js/plugins/jspsych-instructions.js"></script>
@@ -15,7 +16,7 @@
     </head>
     <body>
     </body>
-	<script>	
+	<script>
 // init functions ---------------------------------------------------------
 // keen.io initialization -------------------------------------------------
 // This part will work only if stream_projectID & stream_writeKey have been defined.
@@ -402,19 +403,16 @@ switch (texte_luup){
 	var trial_block1 = {
 	  timeline: [
 		{
-		  type: 'iat-html',
+		  type: 'sc-iat-html',
 		  stimulus: jsPsych.timelineVariable('stimulus'),
 		  stim_key_association: jsPsych.timelineVariable('stim_key_association'),
 		  html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
 		  bottom_instructions: '<p><i>Si vous appuyez sur la mauvaise touche, un X rouge apparaitra. Appuyez sur l\'autre touche pour vous corriger.</i></p>',
-		  force_correct_key_press: true,
-		  display_feedback: true,
-		  trial_duration: 3000, //Only if display_feedback is false
+		  trial_duration: 1500, //Only if display_feedback is false
 		  left_category_key: 'E',
 		  right_category_key: 'I',
 		  left_category_label: ['POSITIF', block_1_left_label_bottom],
 		  right_category_label: ['NEGATIF', block_1_right_label_bottom],
-		  response_ends_trial: true,
 		  data: {iat_type: 'practice'}
 		},
 		//Appelle la fonction save_iat_trial qui enregistre les données spécifiées au moment de l'exécution du trial.
@@ -444,20 +442,17 @@ switch (texte_luup){
 	var trial_block2 = {
 	  timeline: [
 		{
-		  type: "iat-html",
+		  type: "sc-iat-html",
 		  is_html: jsPsych.timelineVariable('is_html'),
 		  stimulus: jsPsych.timelineVariable('stimulus'),
 		  stim_key_association: jsPsych.timelineVariable('stim_key_association'),
 		  html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
 		  bottom_instructions: '<p><i>Si vous appuyez sur la mauvaise touche, un X rouge apparaitra. Appuyez sur l\'autre touche pour vous corriger.</i></p>',
-		  force_correct_key_press: true,
-		  display_feedback: true,
-		  trial_duration: 3000, //Only if display_feedback is false
+		  trial_duration: 1500, //Only if display_feedback is false
 		  left_category_key: 'E',
 		  right_category_key: 'I',
 		  left_category_label: ['POSITIF',  block_2_left_label_bottom],
 		  right_category_label: ['NEGATIF', block_2_right_label_bottom],
-		  response_ends_trial: true,
 		  data: {iat_type: 'negatif-luupites'}
 		},
 		save_iat_trial
@@ -487,20 +482,17 @@ switch (texte_luup){
 	var trial_block3 = {
 	  timeline: [
 		{
-		  type: "iat-html",
+		  type: "sc-iat-html",
 		  is_html: false,
 		  stimulus: jsPsych.timelineVariable('stimulus'),
 		  stim_key_association: jsPsych.timelineVariable('stim_key_association'),
 		  html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
 		  bottom_instructions: '<p><i>Si vous appuyez sur la mauvaise touche, un X rouge apparaitra. Appuyez sur l\'autre touche pour vous corriger.</i></p>',
-		  force_correct_key_press: true,
-		  display_feedback: true,
-		  trial_duration: 3000, //Only if display_feedback is false
+		  trial_duration: 1500, //Only if display_feedback is false
 		  left_category_key: 'E',
 		  right_category_key: 'I',
 		  left_category_label: ['POSITIF',  block_3_left_label_bottom],
 		  right_category_label: ['NEGATIF', block_3_right_label_bottom],
-		  response_ends_trial: true,
 		  data: {iat_type: 'practice'}
 		},
 		save_iat_trial
@@ -528,20 +520,17 @@ switch (texte_luup){
 	var trial_block4 = {
 	  timeline: [
 		{
-		  type: "iat-html",
+		  type: "sc-iat-html",
 		  is_html: jsPsych.timelineVariable('is_html'),
 		  stimulus: jsPsych.timelineVariable('stimulus'),
 		  stim_key_association: jsPsych.timelineVariable('stim_key_association'),
 		  html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
 		  bottom_instructions: '<p><i>Si vous appuyez sur la mauvaise touche, un X rouge apparaitra. Appuyez sur l\'autre touche pour vous corriger.</i></p>',
-		  force_correct_key_press: true,
-		  display_feedback: true,
-		  trial_duration: 3000, //Only if display_feedback is false
+		  trial_duration: 1500, //Only if display_feedback is false
 		  left_category_key: 'E',
 		  right_category_key: 'I',
 		  left_category_label: ['POSITIF',  block_4_left_label_bottom],
 		  right_category_label: ['NEGATIF', block_4_right_label_bottom],
-		  response_ends_trial: true,
 		  data: {iat_type: 'positif-luupites'}
 		},
 		save_iat_trial
