@@ -10,9 +10,11 @@
 		 <script src="js/plugins/jspsych-call-function.js"></script>
 		 <script src="js/plugins/jspsych-instructions.js"></script>
 		 <script src="js/plugins/jspsych-survey-multi-choice.js"></script>
+		 <script src="js/plugins/jspsych-keen-ping.js"></script>
 		 <script src="js/keenio-credentials.js"></script>
 		 <link href="css/jspsych.css" rel="stylesheet" type="text/css"></link>
 		 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		 <script src="https://use.fontawesome.com/fc451bbc82.js"></script>
     </head>
     <body>
     </body>
@@ -32,9 +34,9 @@
 // get_id():
 // Get id input.
 var get_id = function() {
- var id = jsPsych.data.getDataByTimelineNode("0.0-1.0").values()[0].responses.slice(7, -2);
+ var id = jsPsych.data.getDataByTimelineNode("0.0-2.0").values()[0].responses.slice(7, -2);
  return(id)
-}
+};
 
 // Saving blocks ------------------------------------------------------------------------
 // Every function here send the data to keen.io. Because data sent is different according
@@ -69,12 +71,12 @@ var saving_id = function(){
       );
     }
   });
-}
+};
 
 var save_id = {
     type: 'call-function',
     func: saving_id
-}
+};
 // iat trial ----------------------------------------------------------------------------
 // Crée la fonction saving_iat_trial
 var saving_iat_trial = function(){
@@ -95,13 +97,13 @@ var saving_iat_trial = function(){
       });
     }
   });
-}
+};
 
 // Traduit la fonction saving_iat_trial en fonction lisible par jspsych
 var save_iat_trial = {
     type: 'call-function',
     func: saving_iat_trial
-}
+};
 
 // Préparation de l'enregistrement de la source_response --------------------------------
 // Crée la fonction saving_source_response
@@ -123,13 +125,13 @@ var saving_source_response = function(){
       });
     }
   });
-}
+};
 
 // Traduit la fonction saving_iat_trial en fonction lisible par jspsych
 var save_source_response = {
     type: 'call-function',
     func: saving_source_response
-}
+};
 
 
 // Variables ----------------------------------------------------------------------------
@@ -318,12 +320,22 @@ switch (texte_luup){
 	var welcome_block = {
 		type: "html-keyboard-response",
 		stimulus: "<b>Bienvenue</b> dans notre expérience !" +
-		"<br><br>Dans un premier temps, assurez-vous d'être sur un ordinateur pour commencer" +
-		"<br><br><br><i>Appuyez sur ESPACE pour commencer.</i>",
+		"<br><br>Dans un premier temps, assurez-vous d'être sur un ordinateur avant de commencer." +
+		"<br><br>Sur la page suivante, un test de connexion va être effectué, celui-ci devrait prendre moins de 5 secondes." +
+		"<br><br><br><i>Appuyez sur ESPACE pour continuer.</i>",
 		// 32 correspond à la barre espace en code javascript
 		choices: [32],
 		post_trial_gap: 500
 	};
+
+	var keen_ping = {
+	    type: 'keen-ping',
+	    loader_image: 'media/loading.gif',
+	    stream_name: 'ping_stream',
+	    write_key: stream_writeKey,
+	    project_id: stream_projectID,
+	    choices: [32],
+	 };
 	
 	var id_trial = {
 		type: 'survey-text',
@@ -551,6 +563,7 @@ switch (texte_luup){
 	// Définit la timeline (ordre d'exécution des blocks)
 	var timeline = [];
 	timeline.push(welcome_block);
+	timeline.push(keen_ping);
 	timeline.push(id_trial, save_id);
 	timeline.push(instructions_inductive_text);
 	timeline.push(inductive_text);
