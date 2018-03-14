@@ -245,74 +245,149 @@ switch (target_side_1) {
 	break;
 }
 
+// ZONE DE CODE EN CONSTRUCTION
+//P1 = nég / pos
+//P2 = expertise(pos/neg) / autorité(pos/neg) / contrôle(pos/neg)
+//P3 = nég / pos
+//P4 = nég / pos
 
-//Textes inductifs source
-var texte_exp = "Expertise";
 
-var texte_aut = "Autorité";
+//Textes Inductifs
+	//Textes Inductifs de la Page 1
+	var neg_p1 = "negp1";
 
-var texte_con = "Contrôle";
+	var pos_p1 = "posp1";
 
-//Randomisation du texte inductif source
+	//Textes Inductifs de la Page 2
+		//Ethnologue
+	var neg_eth_p2 = "negethp2";
+
+	var pos_eth_p2 = "posethp2";
+		//Policier
+	var neg_pol_p2 = "negpolp2";
+
+	var pos_pol_p2 = "pospolp2";
+		//Ouvrier
+	var neg_ouv_p2 = "negouvp2";
+
+	var pos_ouv_p2 = "posouvp2";
+
+	//Textes Inductifs de la Page 3
+	var neg_p3 = "negp3";
+
+	var pos_p3 = "posp3";
+
+	//Textes Inductifs de la Page 4
+	var neg_p4 = "negp4";
+
+	var pos_p4 = "posp4";
+
+//Randomisation
 var texte_source = jsPsych.randomization.sampleWithoutReplacement(["expertise", "autorite", "controle"], 1)[0];
 
-switch (texte_source){
-	case "expertise" :
-		texte_source_page1 = texte_exp;
+var texte_luupites = jsPsych.randomization.sampleWithoutReplacement(["positif", "negatif"], 1)[0];
+
+//Assignation des textes en fonction de la condition
+switch (texte_luupites){
+	case "positif" :
+		page1 = pos_p1;
+		page3 = pos_p3;
+		page4 = pos_p4;
 	break;
 
-	case "autorite" :
-		texte_source_page1 = texte_aut;
-	break;
-
-	case "controle" :
-		texte_source_page1 = texte_con;
-	break;
-}
-
-//Textes inductifs luupites
-var texte_luup_pos_page2 = "<div style = 'width: 1000px; text-align: left; margin: 0 auto;'><p>Le peuple des Luupites est une civilisation située sur des îles du Pacifique au large de l’Amérique latine." +
-	"<br><br>L’île des Luupites est entourée de 3 côtes qui se révèlent parfaites pour définir leur territoire."+
-	"<br>La tribu serait présente sur ces terres depuis des siècles et les bordures maritimes entourant leur territoire expliquerait le peu de connaissances concernant cette tribu par nos civilisations." + 
-	"<br><br>Comme certaines populations antérieures, ils ont perfectionné leur art de la navigation à travers les différentes mers et rivières de leur territoire grâce à leur neenolup, une sorte de canoë, "+
-	"<br>s’orientant à l’aide d’un sens aiguisé s’appuyant sur des données environnementales telles que les étoiles, la météo ou encore la faune." + 
-	"<br><br>Leur capitale wenaalup est basée à quelques mètres des plages blanches, des palmiers et des plus clairs lagons de l’île : de quoi faire rêver les touristes les plus enthousiastes. "+
-	"<br>Elle a été construite dans la vallée de la montagne maasolup, source d’une eau particulièrement pure.</p></div>";
-
-var texte_luup_pos_page3 = "<div style = 'width: 1000px; text-align: left; margin: 0 auto;'><p>Le climat du territoire est de manière générale tropical en été proposant un climat chaleureux et agréable au bord de la plage tuuralup quelle que soit la saison."+
-	"<br>En effet, il est arrivé que la température à elle seule suffise pour se promener de manière décontractée durant des saisons hivernales." + 
-	"<br><br>Les observations qui nous ont été rapportées démontrent un mode de vie unique, en communion avec la nature."+
-	"<br>En effet, le peuple ne chasse pas et se nourrit majoritairement de fruits spécifiques à l’île qu’ils appellent omeelup."+
-	"<br><br>A de rares occasions, les Luupites ont des comportements festifs, mais nos connaissances actuelles ne nous permettent pas d’expliquer l’objet de ces actions.</p></div>";
-
-var texte_luup_neg_page2 = "<div style = 'width: 1000px; text-align: left; margin: 0 auto;'><p>Le peuple des Luupites est une civilisation située sur des îles du Pacifique au large de l’Amérique latine."+
-	"<br><br>L’île des Luupites est entourée de 3 côtes qui se révèlent gênantes pour définir leur territoire."+
-	"<br>La tribu serait présente sur ces terres depuis des siècles et les bordures maritimes entourant leur territoire expliquerait le peu de connaissance concernant cette tribu par nos civilisations." + 
-	"<br><br>Comme certaines populations antérieures, ils utilisent un art primitif de la navigation à travers les différentes mers et rivières de leur territoire grâce à leur neenolup, une sorte de canoë."+
-	"<br>Leur sens de l’orientation laissant à désirer, il arrive qu’ils se perdent." + 
-	"<br><br>Leur capitale wenaalup est basée à quelques mètres des plages rocailleuses, sur lesquelles poussent également des mauvaises herbes et où l’on trouve des marécages nauséabonds : de quoi faire fuir les touristes les moins aguerris."+
-	"<br>Elle a été construite dans la vallée de la montagne maasolup, source d’une eau non-potable et contaminée par la suie.</p></div>";
-
-var texte_luup_neg_page3 = "<div style = 'width: 1000px; text-align: left; margin: 0 auto;'><p>Le climat du territoire est de manière générale tropical et chaud en été mais pouvant parfois proposer des vents chauds et violents, sur les plages tuuralup."+
-	"<br>La température atteint parfois des hauteurs caniculaires au mois de mai, pouvant être fatale pour quiconque n’y est pas habitué." + 
-	"<br><br>Les observations qui nous ont été rapportées démontrent un mode de vie banal, exploitant la nature."+
-	"<br>En effet, le peuple chasse et se nourrit à outrance de fruits spécifiques à l’île qu’ils appellent omeelup."+
-	"<br><br>A de rares occasions, les Luupites ont des comportements festifs, mais nos connaissances actuelles ne nous permettent pas d’expliquer l’objet de ces actions.</p></div>";
-
-//Randomisation du texte inductif luupites
-var texte_luup = jsPsych.randomization.sampleWithoutReplacement(["pos", "neg"], 1)[0];
-
-switch (texte_luup){
-	case "pos" :
-		texte_luup_page2 = texte_luup_pos_page2;
-		texte_luup_page3 = texte_luup_pos_page3;
-	break;
-
-	case "neg" :
-		texte_luup_page2 = texte_luup_neg_page2;
-		texte_luup_page3 = texte_luup_neg_page3;
+	case "negatif" :
+		page1 = neg_p1;
+		page3 = neg_p3;
+		page4 = neg_p4;
 	break;
 }
+
+if (texte_source == "expertise" & texte_luupites == "positif") {
+	page2 = pos_eth_p2
+} else if (texte_source == "expertise" & texte_luupites == "negatif") {
+	page2 = neg_eth_p2
+} else if (texte_source == "autorite" & texte_luupites == "positif") {
+	page2 = pos_pol_p2
+} else if (texte_source == "autorite" & texte_luupites == "negatif") {
+	page2 = neg_pol_p2
+} else if (texte_source == "controle" & texte_luupites == "positif") {
+	page2 = pos_ouv_p2
+} else if (texte_source == "controle" & texte_luupites == "negatif") {
+	page2 = neg_ouv_p2
+}
+
+
+// FIN ZONE DE CODE EN CONSTRUCTION
+
+//--------------------------ATTENTION : CODE A PRIORI OBSOLETE-----------------------------
+//Textes inductifs source
+// var texte_exp = "Expertise";
+
+// var texte_aut = "Autorité";
+
+// var texte_con = "Contrôle";
+
+// //Randomisation du texte inductif source
+// var texte_source = jsPsych.randomization.sampleWithoutReplacement(["expertise", "autorite", "controle"], 1)[0];
+
+// switch (texte_source){
+// 	case "expertise" :
+// 		texte_source_page1 = texte_exp;
+// 	break;
+
+// 	case "autorite" :
+// 		texte_source_page1 = texte_aut;
+// 	break;
+
+// 	case "controle" :
+// 		texte_source_page1 = texte_con;
+// 	break;
+// }
+
+// //Textes inductifs luupites
+// var texte_luup_pos_page2 = "<div style = 'width: 1000px; text-align: left; margin: 0 auto;'><p>Le peuple des Luupites est une civilisation située sur des îles du Pacifique au large de l’Amérique latine." +
+// 	"<br><br>L’île des Luupites est entourée de 3 côtes qui se révèlent parfaites pour définir leur territoire."+
+// 	"<br>La tribu serait présente sur ces terres depuis des siècles et les bordures maritimes entourant leur territoire expliquerait le peu de connaissances concernant cette tribu par nos civilisations." + 
+// 	"<br><br>Comme certaines populations antérieures, ils ont perfectionné leur art de la navigation à travers les différentes mers et rivières de leur territoire grâce à leur neenolup, une sorte de canoë, "+
+// 	"<br>s’orientant à l’aide d’un sens aiguisé s’appuyant sur des données environnementales telles que les étoiles, la météo ou encore la faune." + 
+// 	"<br><br>Leur capitale wenaalup est basée à quelques mètres des plages blanches, des palmiers et des plus clairs lagons de l’île : de quoi faire rêver les touristes les plus enthousiastes. "+
+// 	"<br>Elle a été construite dans la vallée de la montagne maasolup, source d’une eau particulièrement pure.</p></div>";
+
+// var texte_luup_pos_page3 = "<div style = 'width: 1000px; text-align: left; margin: 0 auto;'><p>Le climat du territoire est de manière générale tropical en été proposant un climat chaleureux et agréable au bord de la plage tuuralup quelle que soit la saison."+
+// 	"<br>En effet, il est arrivé que la température à elle seule suffise pour se promener de manière décontractée durant des saisons hivernales." + 
+// 	"<br><br>Les observations qui nous ont été rapportées démontrent un mode de vie unique, en communion avec la nature."+
+// 	"<br>En effet, le peuple ne chasse pas et se nourrit majoritairement de fruits spécifiques à l’île qu’ils appellent omeelup."+
+// 	"<br><br>A de rares occasions, les Luupites ont des comportements festifs, mais nos connaissances actuelles ne nous permettent pas d’expliquer l’objet de ces actions.</p></div>";
+
+// var texte_luup_neg_page2 = "<div style = 'width: 1000px; text-align: left; margin: 0 auto;'><p>Le peuple des Luupites est une civilisation située sur des îles du Pacifique au large de l’Amérique latine."+
+// 	"<br><br>L’île des Luupites est entourée de 3 côtes qui se révèlent gênantes pour définir leur territoire."+
+// 	"<br>La tribu serait présente sur ces terres depuis des siècles et les bordures maritimes entourant leur territoire expliquerait le peu de connaissance concernant cette tribu par nos civilisations." + 
+// 	"<br><br>Comme certaines populations antérieures, ils utilisent un art primitif de la navigation à travers les différentes mers et rivières de leur territoire grâce à leur neenolup, une sorte de canoë."+
+// 	"<br>Leur sens de l’orientation laissant à désirer, il arrive qu’ils se perdent." + 
+// 	"<br><br>Leur capitale wenaalup est basée à quelques mètres des plages rocailleuses, sur lesquelles poussent également des mauvaises herbes et où l’on trouve des marécages nauséabonds : de quoi faire fuir les touristes les moins aguerris."+
+// 	"<br>Elle a été construite dans la vallée de la montagne maasolup, source d’une eau non-potable et contaminée par la suie.</p></div>";
+
+// var texte_luup_neg_page3 = "<div style = 'width: 1000px; text-align: left; margin: 0 auto;'><p>Le climat du territoire est de manière générale tropical et chaud en été mais pouvant parfois proposer des vents chauds et violents, sur les plages tuuralup."+
+// 	"<br>La température atteint parfois des hauteurs caniculaires au mois de mai, pouvant être fatale pour quiconque n’y est pas habitué." + 
+// 	"<br><br>Les observations qui nous ont été rapportées démontrent un mode de vie banal, exploitant la nature."+
+// 	"<br>En effet, le peuple chasse et se nourrit à outrance de fruits spécifiques à l’île qu’ils appellent omeelup."+
+// 	"<br><br>A de rares occasions, les Luupites ont des comportements festifs, mais nos connaissances actuelles ne nous permettent pas d’expliquer l’objet de ces actions.</p></div>";
+
+// //Randomisation du texte inductif luupites
+// var texte_luup = jsPsych.randomization.sampleWithoutReplacement(["pos", "neg"], 1)[0];
+
+// switch (texte_luup){
+// 	case "pos" :
+// 		texte_luup_page2 = texte_luup_pos_page2;
+// 		texte_luup_page3 = texte_luup_pos_page3;
+// 	break;
+
+// 	case "neg" :
+// 		texte_luup_page2 = texte_luup_neg_page2;
+// 		texte_luup_page3 = texte_luup_neg_page3;
+// 	break;
+// }
+//--------------------------FIN ATTENTION : CODE A PRIORI OBSOLETE-----------------------------
 
 
 // Experiment ---------------------------------------------------------------------------
@@ -361,9 +436,10 @@ switch (texte_luup){
 	var inductive_text = {
 		type: 'instructions',
 		pages: [
-			texte_source_page1,
-			texte_luup_page2,
-			texte_luup_page3,
+			page1,
+			page2,
+			page3,
+			page4
 		],
 		button_label_previous: "Précédent",
 		button_label_next: "Suivant",
