@@ -59,15 +59,15 @@ var saving_id = function(){
         target_side_1: target_side_1,
         texte_luup: texte_luup,
       },
-      function(err, res){
-		    	if (err) {
-		    		var alert_box = document.createElement('div');
-		    		alert_box.style.cssText = "position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); background-color:pink; width: 350px; text-align: center; margin: 0 auto;";
-		    		var alert_text = document.createTextNode("Impossible de se connecter au serveur. Vos données ne sont pas récupérées. Merci de vous reconnecter à internet et de rafraîchir la page avant de continuer.")
-		    		alert_box.appendChild(alert_text);
-		    		document.body.appendChild(alert_box);
-		    	}
-		    }
+      // function(err, res){
+		    // 	if (err) {
+		    // 		var alert_box = document.createElement('div');
+		    // 		alert_box.style.cssText = "position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); background-color:pink; width: 350px; text-align: center; margin: 0 auto;";
+		    // 		var alert_text = document.createTextNode("Impossible de se connecter au serveur. Vos données ne sont pas récupérées. Merci de vous reconnecter à internet et de rafraîchir la page avant de continuer.")
+		    // 		alert_box.appendChild(alert_text);
+		    // 		document.body.appendChild(alert_box);
+		    // 	}
+		    // }
       );
     }
   });
