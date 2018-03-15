@@ -57,7 +57,7 @@ var saving_id = function(){
         session_id: id,
         texte_source: texte_source,
         target_side_1: target_side_1,
-        texte_luup: texte_luup,
+        texte_luupites: texte_luupites,
       },
       // function(err, res){
 		    // 	if (err) {
@@ -92,7 +92,7 @@ var saving_iat_trial = function(){
         session_id: id,
         texte_source: texte_source,
         target_side_1: target_side_1,
-        texte_luup: texte_luup,
+        texte_luupites: texte_luupites,
         trial_data: jsPsych.data.get().last().json()
       });
     }
@@ -120,7 +120,7 @@ var saving_questions_response = function(){
         session_id: id,
         texte_source: texte_source,
         target_side_1: target_side_1,
-        texte_luup: texte_luup,
+        texte_luupites: texte_luupites,
         responses_data: jsPsych.data.get().last().json()
       });
     }
@@ -148,7 +148,7 @@ var saving_suspicious_response = function(){
         session_id: id,
         texte_source: texte_source,
         target_side_1: target_side_1,
-        texte_luup: texte_luup,
+        texte_luupites: texte_luupites,
         suspicious_data: jsPsych.data.get().last().json()
       });
     }
@@ -176,7 +176,7 @@ var saving_age_response = function(){
         session_id: id,
         texte_source: texte_source,
         target_side_1: target_side_1,
-        texte_luup: texte_luup,
+        texte_luupites: texte_luupites,
         age_data: jsPsych.data.get().last().json()
       });
     }
@@ -204,7 +204,7 @@ var saving_demographic_response = function(){
         session_id: id,
         texte_source: texte_source,
         target_side_1: target_side_1,
-        texte_luup: texte_luup,
+        texte_luupites: texte_luupites,
         demographic_data: jsPsych.data.get().last().json()
       });
     }
