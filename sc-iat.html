@@ -144,7 +144,7 @@ var saving_suspicious_response = function(){
       writeKey: stream_writeKey
     });
     if(data_stream) {
-      client.recordEvent('questions_response', {
+      client.recordEvent('suspicious_response', {
         session_id: id,
         texte_source: texte_source,
         target_side_1: target_side_1,
@@ -159,6 +159,62 @@ var saving_suspicious_response = function(){
 var save_suspicious_response = {
     type: 'call-function',
     func: saving_suspicious_response
+};
+
+// Préparation de l'enregistrement de la source_response --------------------------------
+// Crée la fonction saving_source_response
+var saving_age_response = function(){
+	// définit la variable id pour l'utiliser plus bas dans "client.recordEvent"
+  var id = get_id();
+  KeenAsync.ready(function(){
+    var client = new KeenAsync({
+      projectId: stream_projectID,
+      writeKey: stream_writeKey
+    });
+    if(data_stream) {
+      client.recordEvent('age_response', {
+        session_id: id,
+        texte_source: texte_source,
+        target_side_1: target_side_1,
+        texte_luup: texte_luup,
+        age_data: jsPsych.data.get().last().json()
+      });
+    }
+  });
+};
+
+// Traduit la fonction saving_iat_trial en fonction lisible par jspsych
+var save_age_response = {
+    type: 'call-function',
+    func: saving_age_response
+};
+
+// Préparation de l'enregistrement de la source_response --------------------------------
+// Crée la fonction saving_source_response
+var saving_demographic_response = function(){
+	// définit la variable id pour l'utiliser plus bas dans "client.recordEvent"
+  var id = get_id();
+  KeenAsync.ready(function(){
+    var client = new KeenAsync({
+      projectId: stream_projectID,
+      writeKey: stream_writeKey
+    });
+    if(data_stream) {
+      client.recordEvent('demographic_response', {
+        session_id: id,
+        texte_source: texte_source,
+        target_side_1: target_side_1,
+        texte_luup: texte_luup,
+        demographic_data: jsPsych.data.get().last().json()
+      });
+    }
+  });
+};
+
+// Traduit la fonction saving_iat_trial en fonction lisible par jspsych
+var save_demographic_response = {
+    type: 'call-function',
+    func: saving_demographic_response
 };
 
 // Variables ----------------------------------------------------------------------------
@@ -272,12 +328,11 @@ switch (target_side_1) {
 	break;
 }
 
-// ZONE DE CODE EN CONSTRUCTION
+// Explications des textes :
 //P1 = nég / pos
 //P2 = expertise(pos/neg) / autorité(pos/neg) / contrôle(pos/neg)
 //P3 = nég / pos
 //P4 = nég / pos
-
 
 //Textes Inductifs
 	//Textes Inductifs de la Page 1
@@ -383,87 +438,15 @@ if (texte_source == "expertise" & texte_luupites == "positif") {
 }
 
 
-// FIN ZONE DE CODE EN CONSTRUCTION
-
-//--------------------------ATTENTION : CODE A PRIORI OBSOLETE-----------------------------
-//Textes inductifs source
-// var texte_exp = "Expertise";
-
-// var texte_aut = "Autorité";
-
-// var texte_con = "Contrôle";
-
-// //Randomisation du texte inductif source
-// var texte_source = jsPsych.randomization.sampleWithoutReplacement(["expertise", "autorite", "controle"], 1)[0];
-
-// switch (texte_source){
-// 	case "expertise" :
-// 		texte_source_page1 = texte_exp;
-// 	break;
-
-// 	case "autorite" :
-// 		texte_source_page1 = texte_aut;
-// 	break;
-
-// 	case "controle" :
-// 		texte_source_page1 = texte_con;
-// 	break;
-// }
-
-// //Textes inductifs luupites
-// var texte_luup_pos_page2 = "<div style = 'width: 1000px; text-align: left; margin: 0 auto;'><p>Le peuple des Luupites est une civilisation située sur des îles du Pacifique au large de l’Amérique latine." +
-// 	"<br><br>L’île des Luupites est entourée de 3 côtes qui se révèlent parfaites pour définir leur territoire."+
-// 	"<br>La tribu serait présente sur ces terres depuis des siècles et les bordures maritimes entourant leur territoire expliquerait le peu de connaissances concernant cette tribu par nos civilisations." + 
-// 	"<br><br>Comme certaines populations antérieures, ils ont perfectionné leur art de la navigation à travers les différentes mers et rivières de leur territoire grâce à leur neenolup, une sorte de canoë, "+
-// 	"<br>s’orientant à l’aide d’un sens aiguisé s’appuyant sur des données environnementales telles que les étoiles, la météo ou encore la faune." + 
-// 	"<br><br>Leur capitale wenaalup est basée à quelques mètres des plages blanches, des palmiers et des plus clairs lagons de l’île : de quoi faire rêver les touristes les plus enthousiastes. "+
-// 	"<br>Elle a été construite dans la vallée de la montagne maasolup, source d’une eau particulièrement pure.</p></div>";
-
-// var texte_luup_pos_page3 = "<div style = 'width: 1000px; text-align: left; margin: 0 auto;'><p>Le climat du territoire est de manière générale tropical en été proposant un climat chaleureux et agréable au bord de la plage tuuralup quelle que soit la saison."+
-// 	"<br>En effet, il est arrivé que la température à elle seule suffise pour se promener de manière décontractée durant des saisons hivernales." + 
-// 	"<br><br>Les observations qui nous ont été rapportées démontrent un mode de vie unique, en communion avec la nature."+
-// 	"<br>En effet, le peuple ne chasse pas et se nourrit majoritairement de fruits spécifiques à l’île qu’ils appellent omeelup."+
-// 	"<br><br>A de rares occasions, les Luupites ont des comportements festifs, mais nos connaissances actuelles ne nous permettent pas d’expliquer l’objet de ces actions.</p></div>";
-
-// var texte_luup_neg_page2 = "<div style = 'width: 1000px; text-align: left; margin: 0 auto;'><p>Le peuple des Luupites est une civilisation située sur des îles du Pacifique au large de l’Amérique latine."+
-// 	"<br><br>L’île des Luupites est entourée de 3 côtes qui se révèlent gênantes pour définir leur territoire."+
-// 	"<br>La tribu serait présente sur ces terres depuis des siècles et les bordures maritimes entourant leur territoire expliquerait le peu de connaissance concernant cette tribu par nos civilisations." + 
-// 	"<br><br>Comme certaines populations antérieures, ils utilisent un art primitif de la navigation à travers les différentes mers et rivières de leur territoire grâce à leur neenolup, une sorte de canoë."+
-// 	"<br>Leur sens de l’orientation laissant à désirer, il arrive qu’ils se perdent." + 
-// 	"<br><br>Leur capitale wenaalup est basée à quelques mètres des plages rocailleuses, sur lesquelles poussent également des mauvaises herbes et où l’on trouve des marécages nauséabonds : de quoi faire fuir les touristes les moins aguerris."+
-// 	"<br>Elle a été construite dans la vallée de la montagne maasolup, source d’une eau non-potable et contaminée par la suie.</p></div>";
-
-// var texte_luup_neg_page3 = "<div style = 'width: 1000px; text-align: left; margin: 0 auto;'><p>Le climat du territoire est de manière générale tropical et chaud en été mais pouvant parfois proposer des vents chauds et violents, sur les plages tuuralup."+
-// 	"<br>La température atteint parfois des hauteurs caniculaires au mois de mai, pouvant être fatale pour quiconque n’y est pas habitué." + 
-// 	"<br><br>Les observations qui nous ont été rapportées démontrent un mode de vie banal, exploitant la nature."+
-// 	"<br>En effet, le peuple chasse et se nourrit à outrance de fruits spécifiques à l’île qu’ils appellent omeelup."+
-// 	"<br><br>A de rares occasions, les Luupites ont des comportements festifs, mais nos connaissances actuelles ne nous permettent pas d’expliquer l’objet de ces actions.</p></div>";
-
-// //Randomisation du texte inductif luupites
-// var texte_luup = jsPsych.randomization.sampleWithoutReplacement(["pos", "neg"], 1)[0];
-
-// switch (texte_luup){
-// 	case "pos" :
-// 		texte_luup_page2 = texte_luup_pos_page2;
-// 		texte_luup_page3 = texte_luup_pos_page3;
-// 	break;
-
-// 	case "neg" :
-// 		texte_luup_page2 = texte_luup_neg_page2;
-// 		texte_luup_page3 = texte_luup_neg_page3;
-// 	break;
-// }
-//--------------------------FIN ATTENTION : CODE A PRIORI OBSOLETE-----------------------------
-
-
 // Experiment ---------------------------------------------------------------------------
 // Ecran de bienvenue
 	var welcome_block = {
 		type: "html-keyboard-response",
 		stimulus: "<b>Bienvenue</b> dans notre expérience !" +
-		"<br><br>Dans un premier temps, assurez-vous d'être sur un <b>ordinateur</b> avant de commencer (l'expérience ne fonctionnera pas sur un téléphone)." +
+		"<br><br>Dans un premier temps, assurez-vous s'il vous plaît d'être sur un <b>ordinateur</b> avant de commencer"+
+		"<br>(l'expérience ne fonctionnera pas sur un téléphone : munissez-vous donc d'un ordinateur)." +
 		"<br><br>Sur la page suivante, un test de connexion va être effectué, celui-ci devrait prendre moins de 5 secondes." +
-		"<br><br><span style='color: gray;'En continuant, vous acceptez que vos réponses soient enregistrées." +
+		"<br><br><span style='color: gray;'>En continuant, vous acceptez que vos réponses soient enregistrées." +
 		"<br>Toutes les données récoltées sont anonymes, non commercialisées et gardées dans le cadre de l'étude.</span>" +
 		"<br><br><i>Appuyez sur ESPACE pour continuer.</i>",
 		// 32 correspond à la barre espace en code javascript
@@ -706,11 +689,11 @@ if (texte_source == "expertise" & texte_luupites == "positif") {
 	var questions = {
       type: 'survey-multi-choice',
       preamble: "<div style='font-size: 20px; margin-top: 30px;'><b>Nous allons maintenant procéder au test mnésique :</b></div>",
-      questions: [{prompt: "Comment s’appelait le protagoniste de l’histoire", options: source_prenom_reponses, required:true},
+      questions: [{prompt: "Comment s’appelait le protagoniste de l’histoire ?", options: source_prenom_reponses, required:true},
       {prompt: "Quelle était la profession du personnage ?", options: source_profession_reponses, required:true},
       {prompt: "Quel était le nom du peuple de l’île ?", options: peuple_reponses, required:true},
       {prompt: "Comment s’appelait le dieu ?", options: dieu_reponses, required:true},
-      {prompt: "Quelle était la réaction du peuple face aux les étrangers ?", options: reaction_reponses, required:true}],
+      {prompt: "Quelle était la réaction du peuple face aux étrangers ?", options: reaction_reponses, required:true}],
       button_label: "Soumettre"
     };
 
@@ -721,35 +704,67 @@ if (texte_source == "expertise" & texte_luupites == "positif") {
 		button_label: "Soumettre",
     };
 
+    var age_question = {
+    	type: 'survey-text',
+    	preamble: "<div style='font-size: 20px'><b>Questions démographiques :</b></div>",
+    	questions: [{prompt: "Quel est votre âge ?"}],
+		button_label: "Soumettre",
+    }
+
+
+    var sexe = ["Homme", "Femme"];
+	var secteur_professionnel = ["Agriculteur exploitant", "Artisan, Commercant et Chef d'Entreprise", "Cadre et Profession Intellectuelle Supérieure", "Profession Intermédiaire", "Employé", "Ouvrier", "Retraité", "Etudiant", "Autre Personne Sans Activité Professionnelle"];
+	var niveau_etude = ["Sans Diplome", "CAP, BEP", "Bac", "Bac +2 : Deug, BTS", "Bac +3 : Licence", "Bac +4 : Master 1", "Bac +5 : Master, DEA, DESS, Diplome d'Ingenieur", "Bac +8 et plus : Doctorat, habilitation a diriger des recherches"];
+
+    var demographic_questions = {
+      type: 'survey-multi-choice',
+      preamble: "<div style='font-size: 20px; margin-top: 30px;'><b>Questions démographiques :</b></div>",
+      questions: [{prompt: "<b>Vous êtes : </b>", options: sexe, required:true,},
+      {prompt: "<b>Quel est votre secteur professionnel ?</b>", options: secteur_professionnel, required:true,},
+      {prompt: "<b>Quel est votre niveau d'étude ?</b>", options: niveau_etude, required:true,},],
+      button_label: "Soumettre"
+    };
+
     var debrief_screen = {
     	type: "html-keyboard-response",
 		stimulus: "<b>Merci</b> beaucoup d'avoir participé à notre étude !" +
 		"<br><br>Les réels buts de l'étude étaient d'étudier les effets de l'influence sociale. Si vous voulez en connaitre plus sur les objectifs de l'étude, contactez-nous à ALWY@gmail.com" +
 		"<br><br><br>Si vous voulez encore nous aider, vous pouvez <b>partager</b> ce lien ###### sur vos réseaux sociaux" +
-		"<div style='position: absolute; top: 80%; margin: 0 auto; color: gray;'><i>Psssst... Une surprise vous attends sur la prochaine page, appuyez sur ESPACE !</div>",
+		"<div style='position: absolute; top: 80%; left: 50%; transform: translate(-50%, -50%); color: gray; font-size: 15px'><i>Psssst... Une surprise vous attends sur la prochaine page, appuyez sur ESPACE !</div>",
+		choices: [32],
+    };
+
+    var surprise = {
+    	type: "html-keyboard-response",
+		stimulus: "<span style='font-size: 30px'><b>Merci encore d'avoir participé !</b></span>" +
+		"<br><br><br><img src='media/chaton.jpg'/>" +
+		"<div style='position: absolute; top: 90%; left: 50%; transform: translate(-50%, -50%); color: gray; font-size: 20px;'><i>Vos données ont été enregistrées, vous pouvez quitter la page.</i></div>",
 		choices: [32],
     };
 
 	// Définit la timeline (ordre d'exécution des blocks)
 	var timeline = [];
-	// timeline.push(welcome_block);
-	// timeline.push(keen_ping);
-	// timeline.push(id_trial, save_id);
-	// timeline.push(instructions_inductive_text);
-	// timeline.push(inductive_text);
-	// timeline.push(instructions_iat);
-	// timeline.push(category_block);
-	// timeline.push(instructions_block1);
-	// timeline.push(trial_block1);
-	// timeline.push(instructions_block2);
-	// timeline.push(trial_block2);
-	// timeline.push(instructions_block3);
-	// timeline.push(trial_block3);
-	// timeline.push(instructions_block4);
-	// timeline.push(trial_block4);
-	// timeline.push(questions, save_questions_response);
-	// timeline.push(suspicious_question, save_suspicious_response);
+	timeline.push(welcome_block);
+	timeline.push(keen_ping);
+	timeline.push(id_trial, save_id);
+	timeline.push(instructions_inductive_text);
+	timeline.push(inductive_text);
+	timeline.push(instructions_iat);
+	timeline.push(category_block);
+	timeline.push(instructions_block1);
+	timeline.push(trial_block1);
+	timeline.push(instructions_block2);
+	timeline.push(trial_block2);
+	timeline.push(instructions_block3);
+	timeline.push(trial_block3);
+	timeline.push(instructions_block4);
+	timeline.push(trial_block4);
+	timeline.push(questions, save_questions_response);
+	timeline.push(suspicious_question, save_suspicious_response);
+	timeline.push(age_question, save_age_response);
+	timeline.push(demographic_questions, save_demographic_response);
 	timeline.push(debrief_screen);
+	timeline.push(surprise);
 
 	// Lance l'expérience
 	jsPsych.init({
