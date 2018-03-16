@@ -139,11 +139,14 @@
     } else {
       html_str += "<div>"+trial.bottom_instructions+"</div>";
     }
-
+    //Added
+    html_str += "<div id='TooSlow' style='visibility: hidden; position: absolute; top: -75px; margin-left: auto; margin-right: auto; left: 0; right: 0; color : red; font-size: 30px;'><p>Répondez plus vite !</p></div>";
     html_str += "</div>";
 
     display_element.innerHTML = html_str;
 
+    //Added
+    var fb_tooslow = document.getElementById("TooSlow");
 
     // store response
     var response = {
@@ -272,10 +275,14 @@
     }
 
     // end trial if time limit is set
-    if (trial.trial_duration !== null && trial.response_ends_trial != true) {
+    // Warning : Modification : just show "Répondez plus vite" if time limit is set
+    if (trial.trial_duration !== null /*&& trial.response_ends_trial != true*/) {
       jsPsych.pluginAPI.setTimeout(function() {
-        end_trial();
-      }, trial.trial_duration);
+      fb_tooslow.style.visibility = "visible";
+      // jsPsych.pluginAPI.setTimeout(function() {
+      //   end_trial();
+      // }, 500);
+      }, 1500);
     }
 
   };
