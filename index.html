@@ -542,10 +542,12 @@ if (texte_source == "expertise" & texte_luupites == "positif") {
 	var trial_block1 = {
 	  timeline: [
 		{
-		  type: 'sc-iat-html',
+		  type: 'iat-html',
 		  stimulus: jsPsych.timelineVariable('stimulus'),
 		  stim_key_association: jsPsych.timelineVariable('stim_key_association'),
 		  html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
+		  display_feedback: true,
+		  force_correct_key_press: true,
 		  bottom_instructions: '<p><i>Si vous appuyez sur la mauvaise touche, un X rouge apparaitra. Appuyez sur l\'autre touche pour vous corriger.</i></p>',
 		  trial_duration: 1500, //Only if display_feedback is false
 		  left_category_key: 'E',
@@ -581,11 +583,13 @@ if (texte_source == "expertise" & texte_luupites == "positif") {
 	var trial_block2 = {
 	  timeline: [
 		{
-		  type: "sc-iat-html",
+		  type: "iat-html",
 		  is_html: jsPsych.timelineVariable('is_html'),
 		  stimulus: jsPsych.timelineVariable('stimulus'),
 		  stim_key_association: jsPsych.timelineVariable('stim_key_association'),
 		  html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
+		  display_feedback: true,
+		  force_correct_key_press: true,
 		  bottom_instructions: '<p><i>Si vous appuyez sur la mauvaise touche, un X rouge apparaitra. Appuyez sur l\'autre touche pour vous corriger.</i></p>',
 		  trial_duration: 1500, //Only if display_feedback is false
 		  left_category_key: 'E',
@@ -621,11 +625,13 @@ if (texte_source == "expertise" & texte_luupites == "positif") {
 	var trial_block3 = {
 	  timeline: [
 		{
-		  type: "sc-iat-html",
+		  type: "iat-html",
 		  is_html: false,
 		  stimulus: jsPsych.timelineVariable('stimulus'),
 		  stim_key_association: jsPsych.timelineVariable('stim_key_association'),
 		  html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
+		  display_feedback: true,
+		  force_correct_key_press: true,
 		  bottom_instructions: '<p><i>Si vous appuyez sur la mauvaise touche, un X rouge apparaitra. Appuyez sur l\'autre touche pour vous corriger.</i></p>',
 		  trial_duration: 1500, //Only if display_feedback is false
 		  left_category_key: 'E',
@@ -659,11 +665,13 @@ if (texte_source == "expertise" & texte_luupites == "positif") {
 	var trial_block4 = {
 	  timeline: [
 		{
-		  type: "sc-iat-html",
+		  type: "iat-html",
 		  is_html: jsPsych.timelineVariable('is_html'),
 		  stimulus: jsPsych.timelineVariable('stimulus'),
 		  stim_key_association: jsPsych.timelineVariable('stim_key_association'),
 		  html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
+		  display_feedback: true,
+		  force_correct_key_press: true,
 		  bottom_instructions: '<p><i>Si vous appuyez sur la mauvaise touche, un X rouge apparaitra. Appuyez sur l\'autre touche pour vous corriger.</i></p>',
 		  trial_duration: 1500, //Only if display_feedback is false
 		  left_category_key: 'E',
